@@ -1,2 +1,2 @@
-# PacMan
+# TheAdventureGrid
 Group project
