@@ -1,2 +1,2 @@
-# TheAdventureGrid
+# TheAdventuresGrid
 Group project
