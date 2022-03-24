@@ -29,16 +29,4 @@ public record Coordinate(
                 ", coordY=" + coordY +
                 '}';
     }
-
-    public boolean rangeOf(Coordinate coordinate) {
-
-        //        System.out.printf("Y = %d X = %d,   CY = %d CX = %d -> %s%n",
-//                coordY,
-//                coordX,
-//                coordinate.coordY ,
-//                coordinate.coordX,
-//                isInRange);
-
-        return Math.abs(coordX - coordinate.coordX) <= 1 && Math.abs(coordY - coordinate.coordY) <= 1;
-    }
 }

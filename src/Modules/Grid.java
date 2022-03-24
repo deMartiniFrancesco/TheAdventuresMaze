@@ -1,7 +1,14 @@
 package Modules;
 
-import com.google.common.collect.*;
+import Interfaces.Objects.ObjectInterface;
+import Interfaces.Objects.SpawnabeObjectInterface;
+import Modules.Player.Player;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import Main.Game;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -10,47 +17,64 @@ public class Grid {
 
     private final UUID uuid = UUID.randomUUID();
 
+    private final Game main;
+
     private final HashMap<Directions, Grid> directionsReferance = new HashMap<>();
     private final Table<Integer, Integer, Object> campo = HashBasedTable.create();
 
 
     private final int lenCampo = 10;
 
-    public Grid() {
-
-        for (Directions direction: Directions.values()) {
+    public Grid(Game main) {
+        this.main = main;
+        for (Directions direction : Directions.values()) {
             directionsReferance.put(direction, null);
         }
-        initCampo();
     }
 
-    private void initCampo() {
-        for (int row = 0; row < lenCampo; row++) {
-            for (int column = 0; column < lenCampo; column++) {
-                campo.put(row, column, "   ");
-            }
+    public Table<Integer, Integer, Object> getCampo() {
+        return campo;
+    }
+
+    public int getLenCampo() {
+        return lenCampo;
+    }
+
+    public boolean addPlayer(Player player) {
+        Coordinate coordinate = player.getCoords();
+        if (isEmpty(coordinate)) {
+            campo.put(coordinate.coordX(), coordinate.coordY(), player);
+            return true;
         }
+        return false;
+    }
+
+    private boolean isEmpty(Coordinate coordinate) {
+        return campo.get(coordinate.coordX(), coordinate.coordY()) == null;
     }
 
 
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        for (int row = 0; row < lenCampo; row++) {
-            for (int column = 0; column < lenCampo; column++) {
-                output.append(campo.get(row, column)).append("|");
+    public <T extends SpawnabeObjectInterface> void generateObjectRandom(Class<T> clazz, int amount){
+        for (int i = 0; i < amount; i++) {
+            Coordinate newRandomCoord;
+
+            do {
+                newRandomCoord = main.getCoordsProvider().newRandomCoord(lenCampo);
+
+            }while (!isEmpty(newRandomCoord));
+
+            try {
+                campo.put(newRandomCoord.coordX(), newRandomCoord.coordY(), clazz.
+                        getDeclaredConstructor(Coordinate.class).
+                        newInstance(newRandomCoord));
             }
-            output.append("\n");
+            catch (Exception ignored){
+
+            }
+
         }
-        return output.toString();
+
     }
 }
 
-class Test{
-    public static void main(String[] args) {
 
-        Grid grid = new Grid();
-        System.out.println(grid);
-
-    }
-}
