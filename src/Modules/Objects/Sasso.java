@@ -35,12 +35,12 @@ public class Sasso implements InteractiveObjectInterface, BreakableObjectInterfa
 
     @Override
     public Runnable getAction() {
-        return new ObjectInteraction();
+        return null;
     }
 
     @Override
     public Runnable getBreakAction() {
-        return new ObjectDropAction(null);
+        return null;
     }
 }
 

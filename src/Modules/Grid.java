@@ -69,7 +69,7 @@ public class Grid {
                         newInstance(newRandomCoord));
             }
             catch (Exception ignored){
-
+                System.out.println("Catch Exception");
             }
 
         }

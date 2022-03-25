@@ -5,6 +5,7 @@ import Modules.Objects.Albero;
 import Modules.Coordinate;
 import Modules.Grid;
 import Modules.GridVisualizer;
+import Modules.Objects.Cespuglio;
 import Modules.Objects.Sasso;
 import Modules.Player.Player;
 import Providers.CoordsProvider;
@@ -40,6 +41,8 @@ public class Game implements Application {
         grid.generateObjectRandom(Albero.class, 5);
 
         grid.generateObjectRandom(Sasso.class, 5);
+
+        grid.generateObjectRandom(Cespuglio.class, 5);
 
 
         System.out.println(GridVisualizer.visualizzaTable(grid));

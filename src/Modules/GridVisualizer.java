@@ -1,6 +1,7 @@
 package Modules;
 
 import Modules.Objects.Albero;
+import Modules.Objects.Cespuglio;
 import Modules.Objects.Sasso;
 import Modules.Player.Player;
 
@@ -9,7 +10,8 @@ public class GridVisualizer {
     enum SKINS {
         PLAYER('P'),
         ALBERO('A'),
-        SASSO('S');
+        SASSO('S'),
+        CESPUGLIO('C');
 
         private final char skin;
 
@@ -36,6 +38,8 @@ public class GridVisualizer {
                         output.append(SKINS.ALBERO.getSkin());
                     }else if (element instanceof Sasso) {
                         output.append(SKINS.SASSO.getSkin());
+                    }else if (element instanceof Cespuglio) {
+                        output.append(SKINS.CESPUGLIO.getSkin());
                     }
                 }
                 output.append(" | ");
