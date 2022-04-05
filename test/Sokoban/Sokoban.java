@@ -5,8 +5,6 @@ import java.awt.*;
 
 public class Sokoban extends JFrame {
 
-    private final int OFFSET = 30;
-
     public Sokoban() {
 
         initUI();
@@ -19,6 +17,7 @@ public class Sokoban extends JFrame {
 
         setTitle("Sokoban");
 
+        int OFFSET = 30;
         setSize(board.getBoardWidth() + OFFSET,
                 board.getBoardHeight() + 2 * OFFSET);
 
