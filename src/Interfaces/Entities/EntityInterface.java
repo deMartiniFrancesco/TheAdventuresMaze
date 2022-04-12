@@ -6,8 +6,7 @@ import java.util.UUID;
 
 public interface EntityInterface {
 
-    UUID getUUID();
-    Cell getCoords();
+    Cell getCell();
 
 
 }

@@ -2,19 +2,21 @@ package Main;
 
 import Graffica.GridPane;
 import Interfaces.Application;
-import Modules.Cell;
 import Modules.Grid;
 import Providers.CoordsProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Game implements Application {
 
     public static Game istance;
-    public static Grid grid;
+
+    public States state;
+
+    public Grid grid;
+
+    private GridPane gridPane;
     private CoordsProvider coordsProvider;
 
     public CoordsProvider getCoordsProvider() {
@@ -36,13 +38,26 @@ public class Game implements Application {
 
 
         grid = new Grid(this);
-
-
+        gridPane = new GridPane(this, grid);
         draw();
+
+        changeState(States.LOADING);
+    }
+
+    public void changeState(States state){
+        this.state = state;
+        switch (state){
+            case PLAING -> {
+                grid.addPlayer();
+                gridPane.repaint();
+            }
+            case LOADING -> {
+                grid.generateMaze();
+            }
+        }
     }
 
     public void draw() {
-        GridPane gridPane = new GridPane(grid);
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

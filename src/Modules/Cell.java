@@ -2,10 +2,11 @@ package Modules;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class Cell {
     private final int row, col;
-    public static int DIMENTION = 10;
+    public static int DIMENTION = 20;
 
     private final Grid grid;
 
@@ -28,7 +29,7 @@ public class Cell {
 
     public Cell checkNeighbors() {
 
-        ArrayList<Cell> neighbors = new ArrayList<>();
+        Vector<Cell> neighbors = new Vector<>(4);
 
 
         ArrayList<Cell> cells = grid.getCells();
@@ -52,8 +53,10 @@ public class Cell {
         }
 
         if (!neighbors.isEmpty()) {
+
             int randomNumber = new Random().nextInt(neighbors.size());
             return neighbors.get(randomNumber);
+
         } else {
             return null;
         }

@@ -1,19 +1,26 @@
 package Modules;
 
+import Interfaces.Entities.EntityInterface;
 import Main.Game;
+import Main.States;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Vector;
 
 public class Grid {
 
     private final Game main;
-    private final int lenCampo = 70;
+    private final int lenCampo = 25;
+
+    public int visitate = 0;
 
     private final ArrayList<Cell> cells = new ArrayList<>(lenCampo * lenCampo);
 
     private final Stack<Cell> cellStack = new Stack<>();
 
+    private Player player;
 
     private Cell current;
 
@@ -25,24 +32,9 @@ public class Grid {
         current = cells.get(0);
     }
 
-    public ArrayList<Cell> getCells() {
-        return cells;
-    }
 
-    public Stack<Cell> getCellStack() {
-        return cellStack;
-    }
-
-    public int getLenCampo() {
-        return lenCampo;
-    }
-
-    public Cell getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Cell current) {
-        this.current = current;
+    public void addPlayer(){
+        player = new Player(cells.get(0));
     }
 
     private void initGrid() {
@@ -54,15 +46,38 @@ public class Grid {
         }
     }
 
-    public void removeWalls(Cell a, Cell b){
+    public void generateMaze() {
+        visitate = Math.min(lenCampo * lenCampo, visitate + 1);
+        current.setVisitated(true);
+        Cell next = current.checkNeighbors();
+        if (next != null) {
+            next.setVisitated(true);
+
+            cellStack.push(current);
+
+            removeWalls(current, next);
+
+            current = next;
+        } else {
+            if (!cellStack.isEmpty()) {
+                current = cellStack.pop();
+            } else {
+                main.changeState(States.PLAING);
+                return;
+            }
+        }
+        generateMaze();
+    }
+
+    public void removeWalls(Cell a, Cell b) {
         int x = a.getCol() - b.getCol();
 
-        if (x == 1){
+        if (x == 1) {
             a.modifyWall(3, false);
             b.modifyWall(1, false);
             return;
         }
-        if (x == -1){
+        if (x == -1) {
             a.modifyWall(1, false);
             b.modifyWall(3, false);
             return;
@@ -70,17 +85,26 @@ public class Grid {
 
 
         int y = a.getRow() - b.getRow();
-        if (y == 1){
+        if (y == 1) {
             a.modifyWall(0, false);
             b.modifyWall(2, false);
             return;
         }
-        if (y == -1){
+        if (y == -1) {
             a.modifyWall(2, false);
             b.modifyWall(0, false);
         }
 
     }
+
+    public ArrayList<Cell> getCells() { return cells; }
+
+    public int getLenCampo() { return lenCampo; }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }
 
 
