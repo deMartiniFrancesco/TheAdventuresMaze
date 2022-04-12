@@ -1,42 +1,63 @@
 package Modules;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Random;
 
-public class Cell extends JComponent {
+public class Cell {
+    private final int row, col;
+    public static int DIMENTION = 10;
 
-    private int row, col;
-    int dimension = 20;
+    private final Grid grid;
 
+    private final boolean[] walls = {true, true, true, true};
 
-    boolean[] walls = {true, true, true, true};
+    private boolean visitated = false;
 
-    boolean visitated = false;
-
-    public Cell(int row, int col) {
+    public Cell(int col, int row, Grid grid) {
         this.row = row;
         this.col = col;
-
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.printf("row = %d, col = %d\n", row, col);
-            }
-        });
+        this.grid = grid;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        int x = col * dimension;
-        int y = row * dimension;
+    private int index(int col, int row) {
+        if (col < 0 || row < 0 || col >= grid.getLenCampo() || row >= grid.getLenCampo()) {
+            return -1;
+        }
+        return col + row * grid.getLenCampo();
+    }
 
-        g.drawLine(x, y, x + dimension, y + dimension);
-        g.drawLine(x + dimension, y, x + dimension, y + dimension);
-        g.drawLine(x, y + dimension, x + dimension, y + dimension);
-        g.drawLine(x, y, x, y+dimension);
+    public Cell checkNeighbors() {
+
+        ArrayList<Cell> neighbors = new ArrayList<>();
+
+
+        ArrayList<Cell> cells = grid.getCells();
+
+        Cell top = index(col, row - 1) == -1 ? null : cells.get(index(col, row - 1));
+        Cell right = index(col + 1, row) == -1 ? null : cells.get(index(col + 1, row));
+        Cell bottom = index(col, row + 1) == -1 ? null : cells.get(index(col, row + 1));
+        Cell left = index(col - 1, row) == -1 ? null : cells.get(index(col - 1, row));
+
+        if (top != null && !top.isVisitated()) {
+            neighbors.add(top);
+        }
+        if (right != null && !right.isVisitated()) {
+            neighbors.add(right);
+        }
+        if (bottom != null && !bottom.isVisitated()) {
+            neighbors.add(bottom);
+        }
+        if (left != null && !left.isVisitated()) {
+            neighbors.add(left);
+        }
+
+        if (!neighbors.isEmpty()) {
+            int randomNumber = new Random().nextInt(neighbors.size());
+            return neighbors.get(randomNumber);
+        } else {
+            return null;
+        }
+
     }
 
 
@@ -44,15 +65,23 @@ public class Cell extends JComponent {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public int getCol() {
         return col;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    public boolean[] getWalls() {
+        return walls;
+    }
+
+    public void modifyWall(int index, boolean value) {
+        this.walls[index] = value;
+    }
+
+    public boolean isVisitated() {
+        return visitated;
+    }
+
+    public void setVisitated(boolean visitated) {
+        this.visitated = visitated;
     }
 }

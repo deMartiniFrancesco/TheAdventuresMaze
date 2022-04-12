@@ -3,7 +3,6 @@ package Modules.Player;
 import Interfaces.Entities.MovableEntityInterface;
 import Modules.Cell;
 import Modules.Directions;
-import Modules.Entity.Invetory;
 
 import java.util.UUID;
 
@@ -13,7 +12,6 @@ public class Player implements MovableEntityInterface {
 
     private final String playerTag;
 
-    private final Invetory invetory = new Invetory();
     private final Cell cell;
 
 
