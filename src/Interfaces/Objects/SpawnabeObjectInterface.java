@@ -1,9 +1,9 @@
 package Interfaces.Objects;
 
-import Modules.Coordinate;
+import Modules.Cell;
 
 public interface SpawnabeObjectInterface extends ObjectInterface{
 
-    Coordinate getCoordinate();
+    Cell getCoordinate();
 
 }

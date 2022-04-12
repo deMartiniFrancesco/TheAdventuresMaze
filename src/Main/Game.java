@@ -1,26 +1,27 @@
 package Main;
 
+import Graffica.TestPane;
 import Interfaces.Application;
-import Modules.Objects.Albero;
-import Modules.Coordinate;
 import Modules.Grid;
-import Modules.GridVisualizer;
-import Modules.Objects.Cespuglio;
-import Modules.Objects.Sasso;
-import Modules.Player.Player;
 import Providers.CoordsProvider;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class Game implements Application {
 
     public static Game istance;
+    public static Grid grid;
     private CoordsProvider coordsProvider;
 
     public CoordsProvider getCoordsProvider() {
         return coordsProvider;
     }
 
+
     @Override
     public void onDataLoad() {
+
     }
 
     @Override
@@ -32,21 +33,28 @@ public class Game implements Application {
 
 
 
-        Grid grid = new Grid(this);
-
-        Player player = new Player(new Coordinate(5, 5), "Frenky");
-
-        grid.addPlayer(player);
-
-        grid.generateObjectRandom(Albero.class, 5);
-
-        grid.generateObjectRandom(Sasso.class, 5);
-
-        grid.generateObjectRandom(Cespuglio.class, 5);
+        grid = new Grid(this);
 
 
-        System.out.println(GridVisualizer.visualizzaTable(grid));
 
+        draw();
+    }
+
+    public void draw(){
+        EventQueue.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ignored) {
+            }
+
+            JFrame frame = new JFrame("Testing");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(new BorderLayout());
+            frame.add(new TestPane(grid.getLenCampo()));
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 
 

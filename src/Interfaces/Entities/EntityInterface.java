@@ -1,13 +1,13 @@
 package Interfaces.Entities;
 
-import Modules.Coordinate;
+import Modules.Cell;
 
 import java.util.UUID;
 
 public interface EntityInterface {
 
     UUID getUUID();
-    Coordinate getCoords();
+    Cell getCoords();
 
 
 }

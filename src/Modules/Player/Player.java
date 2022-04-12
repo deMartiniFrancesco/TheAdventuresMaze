@@ -1,28 +1,24 @@
 package Modules.Player;
 
-import Interfaces.Entities.InventoryEntityInterface;
 import Interfaces.Entities.MovableEntityInterface;
-import Interfaces.Entities.StatisticsEntityInterface;
-import Modules.Coordinate;
+import Modules.Cell;
 import Modules.Directions;
 import Modules.Entity.Invetory;
-import Modules.Entity.Statistics;
 
 import java.util.UUID;
 
-public class Player implements MovableEntityInterface, InventoryEntityInterface, StatisticsEntityInterface {
+public class Player implements MovableEntityInterface {
 
     private final UUID uuid = UUID.randomUUID();
 
     private final String playerTag;
 
     private final Invetory invetory = new Invetory();
-    private final Statistics statistics = new Statistics();
-    private final Coordinate coordinate;
+    private final Cell cell;
 
 
-    public Player(Coordinate coordinate, String playerTag) {
-        this.coordinate = coordinate;
+    public Player(Cell cell, String playerTag) {
+        this.cell = cell;
         this.playerTag = playerTag;
     }
 
@@ -32,17 +28,8 @@ public class Player implements MovableEntityInterface, InventoryEntityInterface,
     }
 
     @Override
-    public Coordinate getCoords() {
-        return coordinate;
-    }
-
-    public String getPlayerTag() {
-        return playerTag;
-    }
-
-    @Override
-    public Invetory getInventory() {
-        return invetory;
+    public Cell getCoords() {
+        return cell;
     }
 
     @Override

@@ -5,8 +5,6 @@ import java.awt.*;
 
 public class Wall extends Actor {
 
-    private Image image;
-
     public Wall(int x, int y) {
         super(x, y);
 
@@ -16,7 +14,7 @@ public class Wall extends Actor {
     private void initWall() {
 
         ImageIcon iicon = new ImageIcon("./test/Sokoban/resurces/wall.png");
-        image = iicon.getImage();
+        Image image = iicon.getImage();
         setImage(image);
     }
 }
