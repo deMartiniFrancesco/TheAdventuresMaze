@@ -3,25 +3,22 @@ package Main;
 import Graffica.GridPane;
 import Interfaces.Application;
 import Modules.Grid;
-import Providers.CoordsProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Game implements Application {
 
     public static Game istance;
-
+    public Random random = new Random();
     public States state;
 
+    public static int level = 10;
+
     public Grid grid;
-
-    private GridPane gridPane;
-    private CoordsProvider coordsProvider;
-
-    public CoordsProvider getCoordsProvider() {
-        return coordsProvider;
-    }
+    public GridPane gridPane;
+    public JFrame frame;
 
 
     @Override
@@ -33,40 +30,43 @@ public class Game implements Application {
     public void onEnable() {
         istance = this;
 
-        //Init Providers
-        coordsProvider = new CoordsProvider(this);
-
 
         grid = new Grid(this);
-        gridPane = new GridPane(this, grid);
-        draw();
+        gridPane = new GridPane(this);
 
         changeState(States.LOADING);
     }
 
-    public void changeState(States state){
+    public void changeState(States state) {
         this.state = state;
-        switch (state){
+        switch (state) {
             case PLAING -> {
                 grid.addPlayer();
                 gridPane.repaint();
             }
             case LOADING -> {
                 grid.generateMaze();
+                draw();
+            }
+            case FINISH -> {
+                frame.dispose();
+                level++;
+                grid = new Grid(this);
+                gridPane = new GridPane(this);
+                changeState(States.LOADING);
             }
         }
     }
 
     public void draw() {
+        frame = new JFrame("Maze");
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                      UnsupportedLookAndFeelException ignored) {
             }
-
-            JFrame frame = new JFrame("Testing");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setLayout(new BorderLayout());
             frame.add(gridPane);
             frame.pack();

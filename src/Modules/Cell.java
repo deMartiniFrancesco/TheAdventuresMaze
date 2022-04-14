@@ -1,43 +1,42 @@
 package Modules;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Vector;
+import Main.Game;
+
+import java.util.*;
 
 public class Cell {
     private final int row, col;
     public static int DIMENTION = 20;
 
-    private final Grid grid;
+    private final Random random = Game.istance.random;
 
-    private final boolean[] walls = {true, true, true, true};
+    private final boolean[] walls = {
+            true,   //TOP
+            true,   //RIGTH
+            true,   //BOTTOM
+            true    //LEFT
+    };
 
     private boolean visitated = false;
 
-    public Cell(int col, int row, Grid grid) {
+
+    private Cell top = null;
+    private Cell right = null;
+    private Cell bottom = null;
+    private Cell left = null;
+
+
+    private final Stack<Cell> precedentStack = new Stack<>();
+
+    public Cell(int col, int row) {
         this.row = row;
         this.col = col;
-        this.grid = grid;
     }
 
-    private int index(int col, int row) {
-        if (col < 0 || row < 0 || col >= grid.getLenCampo() || row >= grid.getLenCampo()) {
-            return -1;
-        }
-        return col + row * grid.getLenCampo();
-    }
 
     public Cell checkNeighbors() {
 
-        Vector<Cell> neighbors = new Vector<>(4);
-
-
-        ArrayList<Cell> cells = grid.getCells();
-
-        Cell top = index(col, row - 1) == -1 ? null : cells.get(index(col, row - 1));
-        Cell right = index(col + 1, row) == -1 ? null : cells.get(index(col + 1, row));
-        Cell bottom = index(col, row + 1) == -1 ? null : cells.get(index(col, row + 1));
-        Cell left = index(col - 1, row) == -1 ? null : cells.get(index(col - 1, row));
+        ArrayList<Cell> neighbors = new ArrayList<>();
 
         if (top != null && !top.isVisitated()) {
             neighbors.add(top);
@@ -53,8 +52,7 @@ public class Cell {
         }
 
         if (!neighbors.isEmpty()) {
-
-            int randomNumber = new Random().nextInt(neighbors.size());
+            int randomNumber = random.nextInt(neighbors.size());
             return neighbors.get(randomNumber);
 
         } else {
@@ -63,6 +61,43 @@ public class Cell {
 
     }
 
+    public Cell[] getTrueNeighbors(){
+
+        Cell[] neighbors = new Cell[4];
+
+        if (top != null && !walls[Directions.TOP.getDirectionIndex()]) {
+            neighbors[Directions.TOP.getDirectionIndex()] = top;
+        }
+        if (right != null && !walls[Directions.RIGHT.getDirectionIndex()]) {
+            neighbors[Directions.RIGHT.getDirectionIndex()] = right;
+        }
+        if (bottom != null && !walls[Directions.BOTTOM.getDirectionIndex()]) {
+            neighbors[Directions.BOTTOM.getDirectionIndex()] = bottom;
+        }
+        if (left != null && !walls[Directions.LEFT.getDirectionIndex()]) {
+            neighbors[Directions.LEFT.getDirectionIndex()] = left;
+        }
+
+        return neighbors;
+    }
+
+    public Cell getCasualNotNullNeighbor(Cell exlude){
+        ArrayList<Cell> neighbors = new ArrayList<>();
+
+        if (top != null && top != exlude) {
+            neighbors.add(top);
+        }
+        if (right != null && right != exlude) {
+            neighbors.add(right);
+        }
+        if (bottom != null && bottom != exlude) {
+            neighbors.add(bottom);
+        }
+        if (left != null && left != exlude) {
+            neighbors.add(left);
+        }
+        return neighbors.get(random.nextInt(neighbors.size()));
+    }
 
     public int getRow() {
         return row;
@@ -86,5 +121,40 @@ public class Cell {
 
     public void setVisitated(boolean visitated) {
         this.visitated = visitated;
+    }
+
+
+    public Cell getPrecedent() {
+        if (precedentStack.isEmpty()){
+            return null;
+        }
+        return precedentStack.pop();
+    }
+
+    public Cell pickPrecedent(){
+        if (precedentStack.isEmpty()){
+            return null;
+        }
+        return precedentStack.peek();
+    }
+
+    public void addPrecedent(Cell precedent) {
+        this.precedentStack.push(precedent);
+    }
+
+    public void setTop(Cell top) {
+        this.top = top;
+    }
+
+    public void setRight(Cell right) {
+        this.right = right;
+    }
+
+    public void setBottom(Cell bottom) {
+        this.bottom = bottom;
+    }
+
+    public void setLeft(Cell left) {
+        this.left = left;
     }
 }
