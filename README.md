@@ -10,9 +10,12 @@
   dalla **partenza** bisogna cercare di arrivare all **arrivo** nel minor tempo possibile
 
 
-## UML
+## Documentazione
   Diagramma [UML](https://github.com/deMartiniFrancesco/TheAdventuresGrid/blob/master/doc/UML_diagram.drawio)
 
+  [Specifiche tecniche](https://github.com/deMartiniFrancesco/TheAdventuresMaze/blob/master/doc/documentation.md)
+  
+  [Trello](https://trello.com/b/IuDcnnXz/theadventuresmaze)
 
 
 ## Group members
