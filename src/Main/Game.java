@@ -18,6 +18,9 @@ public class Game implements Application {
 
     public static int level = 20;
 
+    public boolean isPause = false;
+
+
     public Grid grid;
     public JPanel mainPane;
     public JFrame frame;
@@ -41,42 +44,72 @@ public class Game implements Application {
     public void onEnable() {
         istance = this;
 
-        System.out.printf("projectPath %s\n", projectPath);
-
-
-
         changeState(States.MENU);
     }
 
     public void changeState(States state) {
         this.state = state;
         switch (state) {
-            case PLAING -> {
-                grid.addPlayer();
-                mainPane.repaint();
+            case MENU -> {
+                initFrame();
+                mainPane = new MenuPanel();
+                draw();
             }
             case STARTING -> {
-                if (frame != null) {
-                    frame.dispose();
-                }
-                frame = new JFrame("Maze");
+                initFrame();
                 grid = new Grid(this);
                 mainPane = new GridPane(this);
                 grid.generateMaze();
                 draw();
             }
+            case PLAING -> {
+
+                /* TODO
+                    start timer
+                    unblind maze
+                 */
+
+                if (grid.getPlayer() == null) {
+                    grid.addPlayer();
+                }
+                mainPane.repaint();
+            }
+            case PAUSE -> {
+
+                /* TODO
+                    show pause menu
+                    pause the timer
+                    blind maze
+                */
+
+            }
+
+
             case FINISH -> {
+                /* TODO
+                    stop timer
+                    save on file
+                 */
                 level++;
                 changeState(States.STARTING);
             }
-            case MENU -> {
-                if (frame != null) {
-                    frame.dispose();
-                }
-                frame = new JFrame("Menu");
-                mainPane = new MenuPanel();
-                draw();
-            }
+        }
+    }
+
+    private void initFrame() {
+        if (frame != null) {
+            frame.dispose();
+        }
+        frame = new JFrame("TheAdventuresMaze");
+    }
+
+    public void setPause() {
+        isPause = !isPause;
+
+        if (isPause) {
+            changeState(States.PAUSE);
+        } else {
+            changeState(States.PLAING);
         }
     }
 
@@ -101,6 +134,4 @@ public class Game implements Application {
     @Override
     public void onDisable() {
     }
-
-
 }

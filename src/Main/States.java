@@ -2,9 +2,10 @@ package Main;
 
 public enum States {
 
+    MENU,
     STARTING,
     PLAING,
-    FINISH,
-    MENU
+    PAUSE,
+    FINISH
 
 }

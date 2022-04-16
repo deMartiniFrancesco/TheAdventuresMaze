@@ -1,12 +1,12 @@
 package Interfaces;
 
 import Modules.Cell;
-import Modules.Directions;
+import Modules.PlayerKeyAction;
 
 public interface MovableEntity {
 
     Cell getCell();
 
-    void move(Directions directions);
+    void move(PlayerKeyAction playerKeyAction);
 
 }

@@ -2,17 +2,8 @@ package Action;
 
 import Interfaces.Action;
 import Main.Game;
-import Main.States;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class ClickAction implements Action {
-    private final States state;
-
-    public ClickAction(States state) {
-        this.state = state;
-    }
+public record ClickAction(Main.States state) implements Action {
 
     @Override
     public void run() {

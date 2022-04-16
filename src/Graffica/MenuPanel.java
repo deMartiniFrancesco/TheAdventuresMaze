@@ -31,12 +31,14 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
 
             Button startButton = new Button(
+                    "Start",
                     new ImageIcon(buttonIcon),
                     new ClickAction(States.STARTING)
             );
             this.add(startButton);
 
             Button settingsButton = new Button(
+                    "Settings",
                     new ImageIcon(buttonIcon),
                     new ClickAction(States.STARTING)
             );

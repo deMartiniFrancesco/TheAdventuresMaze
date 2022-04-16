@@ -6,7 +6,7 @@ import Interfaces.WindowPanel;
 import Main.Game;
 import Main.States;
 import Modules.Cell;
-import Modules.Directions;
+import Modules.PlayerKeyAction;
 import Modules.Grid;
 
 import javax.swing.*;
@@ -29,11 +29,11 @@ public class GridPane extends JPanel implements WindowPanel {
     @Override
     public void addAction(List<?> args) {
         String name;
-        Directions direction;
+        PlayerKeyAction direction;
         MovableEntity target;
         try {
             name = (String) args.get(0);
-            direction = (Directions) args.get(1);
+            direction = (PlayerKeyAction) args.get(1);
             target = (MovableEntity) args.get(2);
         } catch (Exception ignored) {
             return;

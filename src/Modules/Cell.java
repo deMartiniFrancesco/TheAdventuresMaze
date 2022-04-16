@@ -65,17 +65,17 @@ public class Cell {
 
         Cell[] neighbors = new Cell[4];
 
-        if (top != null && !walls[Directions.TOP.getDirectionIndex()]) {
-            neighbors[Directions.TOP.getDirectionIndex()] = top;
+        if (top != null && !walls[PlayerKeyAction.TOP.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.TOP.getDirectionIndex()] = top;
         }
-        if (right != null && !walls[Directions.RIGHT.getDirectionIndex()]) {
-            neighbors[Directions.RIGHT.getDirectionIndex()] = right;
+        if (right != null && !walls[PlayerKeyAction.RIGHT.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.RIGHT.getDirectionIndex()] = right;
         }
-        if (bottom != null && !walls[Directions.BOTTOM.getDirectionIndex()]) {
-            neighbors[Directions.BOTTOM.getDirectionIndex()] = bottom;
+        if (bottom != null && !walls[PlayerKeyAction.BOTTOM.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.BOTTOM.getDirectionIndex()] = bottom;
         }
-        if (left != null && !walls[Directions.LEFT.getDirectionIndex()]) {
-            neighbors[Directions.LEFT.getDirectionIndex()] = left;
+        if (left != null && !walls[PlayerKeyAction.LEFT.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.LEFT.getDirectionIndex()] = left;
         }
 
         return neighbors;
