@@ -1,7 +1,8 @@
 package Graffica;
 
-import Action.MotionAction;
-import Interfaces.Entities.MovableEntityInterface;
+import Action.MotionActionListener;
+import Interfaces.MovableEntity;
+import Interfaces.WindowPanel;
 import Main.Game;
 import Main.States;
 import Modules.Cell;
@@ -10,8 +11,9 @@ import Modules.Grid;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class GridPane extends JPanel {
+public class GridPane extends JPanel implements WindowPanel {
 
     Game main;
     Grid grid;
@@ -24,9 +26,19 @@ public class GridPane extends JPanel {
         this.grid = Game.istance.grid;
     }
 
-
-    public void addAction(String name, Directions directions, MovableEntityInterface target) {
-        MotionAction action = new MotionAction(name, directions, target);
+    @Override
+    public void addAction(List<?> args) {
+        String name;
+        Directions direction;
+        MovableEntity target;
+        try {
+            name = (String) args.get(0);
+            direction = (Directions) args.get(1);
+            target = (MovableEntity) args.get(2);
+        } catch (Exception ignored) {
+            return;
+        }
+        MotionActionListener action = new MotionActionListener(name, direction, target);
 
         KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(name);
         InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);

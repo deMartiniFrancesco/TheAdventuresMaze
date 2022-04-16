@@ -1,17 +1,17 @@
 package Action;
 
-import Interfaces.Entities.MovableEntityInterface;
+import Interfaces.MovableEntity;
 import Modules.Directions;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MotionAction extends AbstractAction implements ActionListener {
+public class MotionActionListener extends AbstractAction implements ActionListener {
         private final Directions direction;
-        private final MovableEntityInterface target;
+        private final MovableEntity target;
 
-        public MotionAction(String name, Directions directions, MovableEntityInterface target) {
+        public MotionActionListener(String name, Directions directions, MovableEntity target) {
             super(name);
             this.direction = directions;
             this.target = target;

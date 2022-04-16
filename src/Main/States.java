@@ -2,7 +2,7 @@ package Main;
 
 public enum States {
 
-    LOADING,
+    STARTING,
     PLAING,
     FINISH,
     MENU

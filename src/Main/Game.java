@@ -1,6 +1,7 @@
 package Main;
 
 import Graffica.GridPane;
+import Graffica.MenuPanel;
 import Interfaces.Application;
 import Modules.Grid;
 
@@ -11,15 +12,25 @@ import java.util.Random;
 public class Game implements Application {
 
     public static Game istance;
+    private static String projectPath;
     public Random random = new Random();
     public States state;
 
     public static int level = 10;
 
     public Grid grid;
-    public GridPane gridPane;
+    public JPanel mainPane;
     public JFrame frame;
 
+
+    public Game(String projectPath) {
+        Game.projectPath = projectPath;
+    }
+
+    @Override
+    public String getResources() {
+        return projectPath + "/Resources/";
+    }
 
     @Override
     public void onDataLoad() {
@@ -30,11 +41,11 @@ public class Game implements Application {
     public void onEnable() {
         istance = this;
 
+        System.out.printf("projectPath %s\n", projectPath);
 
-        grid = new Grid(this);
-        gridPane = new GridPane(this);
 
-        changeState(States.LOADING);
+
+        changeState(States.MENU);
     }
 
     public void changeState(States state) {
@@ -42,24 +53,35 @@ public class Game implements Application {
         switch (state) {
             case PLAING -> {
                 grid.addPlayer();
-                gridPane.repaint();
+                mainPane.repaint();
             }
-            case LOADING -> {
+            case STARTING -> {
+                if (frame != null) {
+                    frame.dispose();
+                }
+                frame = new JFrame("Maze");
+                grid = new Grid(this);
+                mainPane = new GridPane(this);
                 grid.generateMaze();
                 draw();
             }
             case FINISH -> {
-                frame.dispose();
                 level++;
-                grid = new Grid(this);
-                gridPane = new GridPane(this);
-                changeState(States.LOADING);
+                changeState(States.STARTING);
+            }
+            case MENU -> {
+                if (frame != null) {
+                    frame.dispose();
+                }
+                frame = new JFrame("Menu");
+                mainPane = new MenuPanel();
+                draw();
             }
         }
     }
 
     public void draw() {
-        frame = new JFrame("Maze");
+
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -68,7 +90,7 @@ public class Game implements Application {
             }
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setLayout(new BorderLayout());
-            frame.add(gridPane);
+            frame.add(mainPane);
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

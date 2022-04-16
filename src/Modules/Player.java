@@ -1,11 +1,13 @@
 package Modules;
 
 import Graffica.GridPane;
-import Interfaces.Entities.MovableEntityInterface;
+import Interfaces.MovableEntity;
 import Main.Game;
 import Main.States;
 
-public class Player implements MovableEntityInterface {
+import java.util.List;
+
+public class Player implements MovableEntity {
 
     private Cell cell;
 
@@ -22,11 +24,11 @@ public class Player implements MovableEntityInterface {
 
 
     private void addMotionSupport() {
-        GridPane motion = Game.istance.gridPane;
-        motion.addAction("W", Directions.TOP, this);        //TOP
-        motion.addAction("D", Directions.RIGHT, this);      //RIGHT
-        motion.addAction("S", Directions.BOTTOM, this);     //BOTTOM
-        motion.addAction("A", Directions.LEFT, this);       //LEFT
+        GridPane motion = (GridPane) Game.istance.mainPane;
+        motion.addAction(List.of("W", Directions.TOP, this));        //TOP
+        motion.addAction(List.of("D", Directions.RIGHT, this));      //RIGHT
+        motion.addAction(List.of("S", Directions.BOTTOM, this));     //BOTTOM
+        motion.addAction(List.of("A", Directions.LEFT, this));       //LEFT
     }
 
 
@@ -39,7 +41,7 @@ public class Player implements MovableEntityInterface {
 
         if (target != null) {
             cell = target;
-            Game.istance.gridPane.repaint();
+            Game.istance.mainPane.repaint();
             if (cell == Game.istance.grid.getFinish()){
                 Game.istance.changeState(States.FINISH);
             }
