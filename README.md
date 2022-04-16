@@ -1,15 +1,8 @@
-# TheAdventuresGrid
+# TheAdventuresMaze
 
 ## Descrizione 
 
-  É un gioco openworld, dove si può interagire con gli NPC e la natura, all'interno di un grande mondo fatto da diversi tipi di terreni e habitat da esplorare. In questo mondo il sole sorge e tramonta, si raccolgono materiali e si costruiscono utensili.
-
-  Ogni tanto ci sono animali da poter cacciare ma ci potrebbero essere anche mostri. A seconda della modalità in cui si sta giocando, puoi scegliere la difficoltà dei nemici.
-
-
-## Regolamento
-
-* Sopravvivi più che puoi.
+  É un gioco dove ad ogni turno viene generato automaticamente un labirinto e dalla partenza bisogna cercare di arrivare alla fine nel minor tempo possibile
 
 
 ## UML
