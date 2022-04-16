@@ -16,7 +16,7 @@ public class Game implements Application {
     public Random random = new Random();
     public States state;
 
-    public static int level = 10;
+    public static int level = 20;
 
     public Grid grid;
     public JPanel mainPane;
