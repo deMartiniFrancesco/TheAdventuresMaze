@@ -1,4 +1,4 @@
-package Modules;
+package Models;
 
 import Main.Game;
 import Main.States;
@@ -8,15 +8,13 @@ import java.util.Random;
 
 public class Grid {
 
-    private final Game main;
-
-    public int visitate = 0;
-
-    private final ArrayList<Cell> cells = new ArrayList<>((int) Math.sqrt(Game.level));
+    private final Game game = Game.istance;
+    private final Random random = game.random;
 
     private Player player;
 
-    private final Random random = Game.istance.random;
+    private final ArrayList<Cell> cells = new ArrayList<>((int) Math.sqrt(Game.level));
+    public int visitate = 0;
 
     private Cell finish;
 
@@ -25,9 +23,7 @@ public class Grid {
     public int mutationCouter = 0;
     public int isVisitedCouter = 0;
 
-    public Grid(Game main) {
-        this.main = main;
-
+    public Grid() {
         initGrid();
 
         current = cells.get(0);
@@ -37,7 +33,6 @@ public class Grid {
     public void addPlayer() {
         player = new Player(cells.get(0));
     }
-
 
     private int index(int col, int row) {
         if (col < 0 || row < 0 || col >= Game.level || row >= Game.level) {
@@ -81,7 +76,7 @@ public class Grid {
                 }
             });
         }
-        main.changeState(States.PLAING);
+        game.changeState(States.PLAING);
     }
 
     public boolean calculateCurrent() {
@@ -121,26 +116,26 @@ public class Grid {
         int x = a.getCol() - b.getCol();
 
         if (x == 1) {
-            a.modifyWall(3, false);
-            b.modifyWall(1, false);
+            a.removeWall(PlayerKeyAction.LEFT.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.RIGHT.getDirectionIndex());
             return;
         }
         if (x == -1) {
-            a.modifyWall(1, false);
-            b.modifyWall(3, false);
+            a.removeWall(PlayerKeyAction.RIGHT.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.LEFT.getDirectionIndex());
             return;
         }
 
 
         int y = a.getRow() - b.getRow();
         if (y == 1) {
-            a.modifyWall(0, false);
-            b.modifyWall(2, false);
+            a.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
             return;
         }
         if (y == -1) {
-            a.modifyWall(2, false);
-            b.modifyWall(0, false);
+            a.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
         }
 
     }

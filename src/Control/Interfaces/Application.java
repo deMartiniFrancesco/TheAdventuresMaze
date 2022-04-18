@@ -1,6 +1,4 @@
-package Interfaces;
-
-import java.util.ResourceBundle;
+package Control.Interfaces;
 
 public interface Application {
 

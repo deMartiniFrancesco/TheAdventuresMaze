@@ -6,6 +6,6 @@ public enum States {
     STARTING,
     PLAING,
     PAUSE,
-    FINISH
-
+    NEXT_LEVEL,
+    FINISH;
 }

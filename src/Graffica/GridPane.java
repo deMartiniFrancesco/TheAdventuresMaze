@@ -1,13 +1,13 @@
 package Graffica;
 
-import Action.MotionActionListener;
-import Interfaces.MovableEntity;
-import Interfaces.WindowPanel;
+import Action.Listener.MotionActionListener;
+import Control.Interfaces.MovableEntity;
+import Control.Interfaces.WindowPanel;
 import Main.Game;
 import Main.States;
-import Modules.Cell;
-import Modules.PlayerKeyAction;
-import Modules.Grid;
+import Models.Cell;
+import Models.PlayerKeyAction;
+import Models.Grid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,16 +15,11 @@ import java.util.List;
 
 public class GridPane extends JPanel implements WindowPanel {
 
-    Game main;
-    Grid grid;
+    private final Game game = Game.istance;
 
+    private final Grid grid = game.grid;
 
-    int dimension = Cell.DIMENTION;
-
-    public GridPane(Game main) {
-        this.main = main;
-        this.grid = Game.istance.grid;
-    }
+    private final int dimension = Cell.DIMENTION;
 
     @Override
     public void addAction(List<?> args) {
@@ -56,11 +51,11 @@ public class GridPane extends JPanel implements WindowPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (main.state == States.PLAING) {
+        if (game.state == States.PLAING) {
 
 
             for (Cell cell : grid.getCells()) {
-                boolean[] walls = cell.getWalls();
+                List<Boolean> walls = cell.getWalls();
                 int x = cell.getCol() * dimension;
                 int y = cell.getRow() * dimension;
 
@@ -77,16 +72,16 @@ public class GridPane extends JPanel implements WindowPanel {
                     g.fillRect(x + 2, y + 2, dimension - 4, dimension - 4);
                 }
                 g.setColor(Color.BLACK);
-                if (walls[0]) { // TOP
+                if (walls.get(PlayerKeyAction.TOP.getDirectionIndex())) { // TOP
                     g.drawLine(x, y, x + dimension, y);
                 }
-                if (walls[1]) { //RIGTH
+                if (walls.get(PlayerKeyAction.RIGHT.getDirectionIndex())) { //RIGTH
                     g.drawLine(x + dimension, y, x + dimension, y + dimension);
                 }
-                if (walls[2]) { //BOTTOM
+                if (walls.get(PlayerKeyAction.BOTTOM.getDirectionIndex())) { //BOTTOM
                     g.drawLine(x, y + dimension, x + dimension, y + dimension);
                 }
-                if (walls[3]) { //LEFTH
+                if (walls.get(PlayerKeyAction.LEFT.getDirectionIndex())) { //LEFTH
                     g.drawLine(x, y, x, y + dimension);
                 }
             }

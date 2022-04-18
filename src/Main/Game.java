@@ -1,12 +1,17 @@
 package Main;
 
+import Control.Timer;
 import Graffica.GridPane;
+import Graffica.MainFrame;
 import Graffica.MenuPanel;
-import Interfaces.Application;
-import Modules.Grid;
+import Control.Interfaces.Application;
+import Models.Chronometer;
+import Models.Grid;
+import Models.PlayerKeyAction;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 public class Game implements Application {
@@ -23,7 +28,9 @@ public class Game implements Application {
 
     public Grid grid;
     public JPanel mainPane;
-    public JFrame frame;
+    public MainFrame frame;
+
+    public Chronometer chronometer;
 
 
     public Game(String projectPath) {
@@ -44,63 +51,17 @@ public class Game implements Application {
     public void onEnable() {
         istance = this;
 
-        changeState(States.MENU);
-    }
-
-    public void changeState(States state) {
-        this.state = state;
-        switch (state) {
-            case MENU -> {
-                initFrame();
-                mainPane = new MenuPanel();
-                draw();
-            }
-            case STARTING -> {
-                initFrame();
-                grid = new Grid(this);
-                mainPane = new GridPane(this);
-                grid.generateMaze();
-                draw();
-            }
-            case PLAING -> {
-
-                /* TODO
-                    start timer
-                    unblind maze
-                 */
-
-                if (grid.getPlayer() == null) {
-                    grid.addPlayer();
-                }
-                mainPane.repaint();
-            }
-            case PAUSE -> {
-
-                /* TODO
-                    show pause menu
-                    pause the timer
-                    blind maze
-                */
-
-            }
-
-
-            case FINISH -> {
-                /* TODO
-                    stop timer
-                    save on file
-                 */
-                level++;
-                changeState(States.STARTING);
-            }
+        for (States states : PlayerKeyAction.values()) {
+            motion.addAction(List.of(action.getKey(), action, this));
         }
     }
 
-    private void initFrame() {
+
+    public void initFrame() {
         if (frame != null) {
             frame.dispose();
         }
-        frame = new JFrame("TheAdventuresMaze");
+        frame = new MainFrame("TheAdventuresMaze");
     }
 
     public void setPause() {
@@ -113,25 +74,12 @@ public class Game implements Application {
         }
     }
 
-    public void draw() {
-
-        EventQueue.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                     UnsupportedLookAndFeelException ignored) {
-            }
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
-            frame.add(mainPane);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
-
 
     @Override
     public void onDisable() {
+
+
+
+        System.exit(0);
     }
 }

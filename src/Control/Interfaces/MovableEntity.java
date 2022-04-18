@@ -1,7 +1,7 @@
-package Interfaces;
+package Control.Interfaces;
 
-import Modules.Cell;
-import Modules.PlayerKeyAction;
+import Models.Cell;
+import Models.PlayerKeyAction;
 
 public interface MovableEntity {
 

@@ -1,4 +1,4 @@
-package Modules;
+package Models;
 
 public enum PlayerKeyAction {
 
@@ -9,7 +9,7 @@ public enum PlayerKeyAction {
 
     RESET(-1, "R"),
 
-    PAUSE(-1, "Esc");
+    PAUSE(-1, "Escape");
 
     private final int directionIndex;
     private final String key;

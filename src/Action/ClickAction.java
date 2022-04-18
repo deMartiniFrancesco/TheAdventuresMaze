@@ -1,9 +1,8 @@
 package Action;
 
-import Interfaces.Action;
 import Main.Game;
 
-public record ClickAction(Main.States state) implements Action {
+public record ClickAction(Main.States state) implements Runnable {
 
     @Override
     public void run() {

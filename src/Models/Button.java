@@ -1,6 +1,4 @@
-package Modules;
-
-import Interfaces.Action;
+package Models;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Button extends JButton implements ActionListener {
-    Action action;
+    Runnable action;
 
-    public Button(String title, ImageIcon image, Action action) {
+    public Button(String title, ImageIcon image, Runnable action) {
 
         super(title, image);
         this.action = action;
@@ -24,8 +22,6 @@ public class Button extends JButton implements ActionListener {
         setContentAreaFilled(false);
 
         addActionListener(this);
-
-
     }
 
     @Override

@@ -1,9 +1,9 @@
-package Action;
+package Action.Listener;
 
-import Interfaces.MovableEntity;
+import Control.Interfaces.MovableEntity;
 import Main.Game;
 import Main.States;
-import Modules.PlayerKeyAction;
+import Models.PlayerKeyAction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,18 +20,19 @@ public class MotionActionListener extends AbstractAction implements ActionListen
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (playerKeyAction.equals(PlayerKeyAction.PAUSE)) {
+            System.out.println("Pause");
+            Game.istance.setPause();
+        }
 
         if (Game.istance.isPause){
             return;
         }
-
         if (playerKeyAction.equals(PlayerKeyAction.RESET)) {
-                Game.istance.changeState(States.STARTING);
+            Game.istance.changeState(States.STARTING);
 
-        } else if (playerKeyAction.equals(PlayerKeyAction.PAUSE)) {
-            Game.istance.setPause();
-
-        } else {
+        }
+        else {
             target.move(playerKeyAction);
         }
     }
