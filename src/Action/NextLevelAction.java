@@ -16,6 +16,6 @@ public class NextLevelAction implements Runnable {
         Game.level++;
         System.out.println(game.chronometer.getElapsedTime());
         game.chronometer.cancel();
-        game.changeState(States.STARTING);
+        game.actionListener.performAction(States.STARTING);
     }
 }

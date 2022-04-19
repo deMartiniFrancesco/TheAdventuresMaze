@@ -1,4 +1,4 @@
-package Graffica;
+package Grafica;
 
 import Control.Interfaces.WindowPanel;
 import Action.ClickAction;

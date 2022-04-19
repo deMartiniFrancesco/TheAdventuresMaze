@@ -1,6 +1,6 @@
 package Action;
 
-import Graffica.MenuPanel;
+import Grafica.MenuPanel;
 import Main.Game;
 
 public class MenuAction implements Runnable{
@@ -12,7 +12,7 @@ public class MenuAction implements Runnable{
     public void run() {
         game.initFrame();
         game.mainPane = new MenuPanel();
-        game.draw();
+        game.frame.draw();
     }
 
 }

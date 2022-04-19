@@ -1,4 +1,4 @@
-package Graffica;
+package Grafica;
 
 import Main.Game;
 import Main.States;
@@ -38,9 +38,9 @@ public class MainFrame extends JFrame {
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                      UnsupportedLookAndFeelException ignored) {
             }
-            setCloseOperation(()-> changeState(States.FINISH));
+            setCloseOperation(()-> game.actionListener.performAction(States.FINISH));
             setLayout(new BorderLayout());
-            add(mainPane);
+            add(game.mainPane);
             pack();
             setLocationRelativeTo(null);
             setVisible(true);

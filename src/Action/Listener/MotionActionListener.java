@@ -12,9 +12,10 @@ import java.awt.event.ActionListener;
 public class MotionActionListener extends AbstractAction implements ActionListener {
     private final PlayerKeyAction playerKeyAction;
     private final MovableEntity target;
+    private final Game game = Game.istance;
 
-    public MotionActionListener(String name, PlayerKeyAction playerKeyAction, MovableEntity target) {
-        super(name);
+    public MotionActionListener(String nameCode, PlayerKeyAction playerKeyAction, MovableEntity target) {
+        super(nameCode);
         this.playerKeyAction = playerKeyAction;
         this.target = target;
     }
@@ -22,14 +23,15 @@ public class MotionActionListener extends AbstractAction implements ActionListen
     public void actionPerformed(ActionEvent e) {
         if (playerKeyAction.equals(PlayerKeyAction.PAUSE)) {
             System.out.println("Pause");
-            Game.istance.setPause();
+            game.setPause();
+            return;
         }
 
-        if (Game.istance.isPause){
+        if (game.isPause){
             return;
         }
         if (playerKeyAction.equals(PlayerKeyAction.RESET)) {
-            Game.istance.changeState(States.STARTING);
+            game.actionListener.performAction(States.STARTING);
 
         }
         else {

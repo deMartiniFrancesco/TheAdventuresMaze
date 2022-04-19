@@ -76,7 +76,7 @@ public class Grid {
                 }
             });
         }
-        game.changeState(States.PLAING);
+        game.actionListener.performAction(States.PLAING);
     }
 
     public boolean calculateCurrent() {
@@ -129,13 +129,13 @@ public class Grid {
 
         int y = a.getRow() - b.getRow();
         if (y == 1) {
-            a.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
-            b.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
+            a.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
             return;
         }
         if (y == -1) {
-            a.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
-            b.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
+            a.removeWall(PlayerKeyAction.BOTTOM.getDirectionIndex());
+            b.removeWall(PlayerKeyAction.TOP.getDirectionIndex());
         }
 
     }

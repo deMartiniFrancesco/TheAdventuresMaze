@@ -2,23 +2,30 @@ package Models;
 
 import Main.Game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Stack;
 
 public class Cell {
-
-
-    private final Game game = Game.istance;
-    private final Random random = game.random;
-
     private final int row, col;
     public static int DIMENTION = 20;
 
+    private final Random random = Game.istance.random;
 
-    private final ArrayList<Boolean> walls = new ArrayList<>(4);
-
-    private final ArrayList<Cell> neighborsCell = new ArrayList<>(4);
+    private final boolean[] walls = {
+            true,   //TOP
+            true,   //RIGTH
+            true,   //BOTTOM
+            true    //LEFT
+    };
 
     private boolean visitated = false;
+
+
+    private Cell top = null;
+    private Cell right = null;
+    private Cell bottom = null;
+    private Cell left = null;
 
 
     private final Stack<Cell> precedentStack = new Stack<>();
@@ -26,15 +33,6 @@ public class Cell {
     public Cell(int col, int row) {
         this.row = row;
         this.col = col;
-
-        walls.addAll(List.of(
-                true,   //TOP
-                true,   //RIGTH
-                true,   //BOTTOM
-                true    //LEFT
-        ));
-
-
     }
 
 
@@ -42,17 +40,17 @@ public class Cell {
 
         ArrayList<Cell> neighbors = new ArrayList<>();
 
-        if (getTop() != null && !getTop().isVisitated()) {
-            neighbors.add(getTop());
+        if (top != null && !top.isVisitated()) {
+            neighbors.add(top);
         }
-        if (getRight() != null && !getRight().isVisitated()) {
-            neighbors.add(getRight());
+        if (right != null && !right.isVisitated()) {
+            neighbors.add(right);
         }
-        if (getBottom() != null && !getBottom().isVisitated()) {
-            neighbors.add(getBottom());
+        if (bottom != null && !bottom.isVisitated()) {
+            neighbors.add(bottom);
         }
-        if (getLeft() != null && !getLeft().isVisitated()) {
-            neighbors.add(getLeft());
+        if (left != null && !left.isVisitated()) {
+            neighbors.add(left);
         }
 
         if (!neighbors.isEmpty()) {
@@ -65,40 +63,40 @@ public class Cell {
 
     }
 
-    public Cell[] getTrueNeighbors() {
+    public Cell[] getTrueNeighbors(){
 
         Cell[] neighbors = new Cell[4];
 
-        if (getTop() != null && !walls.get(PlayerKeyAction.TOP.getDirectionIndex())) {
-            neighbors[PlayerKeyAction.TOP.getDirectionIndex()] = getTop();
+        if (top != null && !walls[PlayerKeyAction.TOP.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.TOP.getDirectionIndex()] = top;
         }
-        if (getRight() != null && !walls.get(PlayerKeyAction.RIGHT.getDirectionIndex())) {
-            neighbors[PlayerKeyAction.RIGHT.getDirectionIndex()] = getRight();
+        if (right != null && !walls[PlayerKeyAction.RIGHT.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.RIGHT.getDirectionIndex()] = right;
         }
-        if (getBottom() != null && !walls.get(PlayerKeyAction.BOTTOM.getDirectionIndex())) {
-            neighbors[PlayerKeyAction.BOTTOM.getDirectionIndex()] = getBottom();
+        if (bottom != null && !walls[PlayerKeyAction.BOTTOM.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.BOTTOM.getDirectionIndex()] = bottom;
         }
-        if (getLeft() != null && !walls.get(PlayerKeyAction.LEFT.getDirectionIndex())) {
-            neighbors[PlayerKeyAction.LEFT.getDirectionIndex()] = getLeft();
+        if (left != null && !walls[PlayerKeyAction.LEFT.getDirectionIndex()]) {
+            neighbors[PlayerKeyAction.LEFT.getDirectionIndex()] = left;
         }
 
         return neighbors;
     }
 
-    public Cell getCasualNotNullNeighbor(Cell exlude) {
+    public Cell getCasualNotNullNeighbor(Cell exlude){
         ArrayList<Cell> neighbors = new ArrayList<>();
 
-        if (getTop() != null && getTop() != exlude) {
-            neighbors.add(getTop());
+        if (top != null && top != exlude) {
+            neighbors.add(top);
         }
-        if (getRight() != null && getRight() != exlude) {
-            neighbors.add(getRight());
+        if (right != null && right != exlude) {
+            neighbors.add(right);
         }
-        if (getBottom() != null && getBottom() != exlude) {
-            neighbors.add(getBottom());
+        if (bottom != null && bottom != exlude) {
+            neighbors.add(bottom);
         }
-        if (getLeft() != null && getLeft() != exlude) {
-            neighbors.add(getLeft());
+        if (left != null && left != exlude) {
+            neighbors.add(left);
         }
         return neighbors.get(random.nextInt(neighbors.size()));
     }
@@ -111,12 +109,12 @@ public class Cell {
         return col;
     }
 
-    public List<Boolean> getWalls() {
+    public boolean[] getWalls() {
         return walls;
     }
 
     public void removeWall(int index) {
-        this.walls.set(index, false);
+        this.walls[index] = false;
     }
 
     public boolean isVisitated() {
@@ -129,14 +127,14 @@ public class Cell {
 
 
     public Cell getPrecedent() {
-        if (precedentStack.isEmpty()) {
+        if (precedentStack.isEmpty()){
             return null;
         }
         return precedentStack.pop();
     }
 
-    public Cell pickPrecedent() {
-        if (precedentStack.isEmpty()) {
+    public Cell pickPrecedent(){
+        if (precedentStack.isEmpty()){
             return null;
         }
         return precedentStack.peek();
@@ -146,33 +144,19 @@ public class Cell {
         this.precedentStack.push(precedent);
     }
 
-
-    public Cell getTop(){
-        return neighborsCell.get(PlayerKeyAction.TOP.getDirectionIndex());
-    }
-    public Cell getRight(){
-        return neighborsCell.get(PlayerKeyAction.RIGHT.getDirectionIndex());
-    }
-    public Cell getBottom(){
-        return neighborsCell.get(PlayerKeyAction.BOTTOM.getDirectionIndex());
-    }
-    public Cell getLeft(){
-        return neighborsCell.get(PlayerKeyAction.LEFT.getDirectionIndex());
-    }
-
     public void setTop(Cell top) {
-        neighborsCell.set(PlayerKeyAction.TOP.getDirectionIndex(), top);
+        this.top = top;
     }
 
     public void setRight(Cell right) {
-        neighborsCell.set(PlayerKeyAction.RIGHT.getDirectionIndex(), right);
+        this.right = right;
     }
 
     public void setBottom(Cell bottom) {
-        neighborsCell.set(PlayerKeyAction.BOTTOM.getDirectionIndex(), bottom);
+        this.bottom = bottom;
     }
 
     public void setLeft(Cell left) {
-        neighborsCell.set(PlayerKeyAction.LEFT.getDirectionIndex(), left);
+        this.left = left;
     }
 }

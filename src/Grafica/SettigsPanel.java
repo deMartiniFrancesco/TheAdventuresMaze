@@ -1,4 +1,4 @@
-package Graffica;
+package Grafica;
 
 public class SettigsPanel {
     //TODO

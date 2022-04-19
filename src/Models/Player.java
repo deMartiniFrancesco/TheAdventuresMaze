@@ -1,6 +1,6 @@
 package Models;
 
-import Graffica.GridPane;
+import Grafica.GridPane;
 import Control.Interfaces.MovableEntity;
 import Main.Game;
 import Main.States;
@@ -44,7 +44,7 @@ public class Player implements MovableEntity {
             cell = target;
             game.mainPane.repaint();
             if (cell == game.grid.getFinish()) {
-                game.changeState(States.NEXT_LEVEL);
+                game.actionListener.performAction(States.NEXT_LEVEL);
             }
         }
     }

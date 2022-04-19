@@ -1,6 +1,6 @@
 package Action;
 
-import Graffica.GridPane;
+import Grafica.GridPane;
 import Main.Game;
 import Models.Grid;
 

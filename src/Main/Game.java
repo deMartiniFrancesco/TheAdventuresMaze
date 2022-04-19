@@ -1,17 +1,12 @@
 package Main;
 
-import Control.Timer;
-import Graffica.GridPane;
-import Graffica.MainFrame;
-import Graffica.MenuPanel;
+import Action.Listener.GameActionListener;
+import Grafica.MainFrame;
 import Control.Interfaces.Application;
 import Models.Chronometer;
 import Models.Grid;
-import Models.PlayerKeyAction;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.List;
 import java.util.Random;
 
 public class Game implements Application {
@@ -21,6 +16,7 @@ public class Game implements Application {
     public Random random = new Random();
     public States state;
 
+    public GameActionListener actionListener;
     public static int level = 20;
 
     public boolean isPause = false;
@@ -51,9 +47,9 @@ public class Game implements Application {
     public void onEnable() {
         istance = this;
 
-        for (States states : PlayerKeyAction.values()) {
-            motion.addAction(List.of(action.getKey(), action, this));
-        }
+        actionListener = new GameActionListener();
+
+        actionListener.performAction(States.MENU);
     }
 
 
@@ -68,9 +64,9 @@ public class Game implements Application {
         isPause = !isPause;
 
         if (isPause) {
-            changeState(States.PAUSE);
+            actionListener.performAction(States.PAUSE);
         } else {
-            changeState(States.PLAING);
+            actionListener.performAction(States.PLAING);
         }
     }
 

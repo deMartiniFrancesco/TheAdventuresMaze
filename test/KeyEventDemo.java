@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyEventDemo  extends JFrame
+public class KeyEventDemo extends JFrame
         implements KeyListener,
-        ActionListener
-{
+        ActionListener {
     JTextArea displayArea;
     JTextField typingArea;
     static final String newline = System.getProperty("line.separator");
@@ -19,7 +18,8 @@ public class KeyEventDemo  extends JFrame
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException ex) {
+        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException |
+                 ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         /* Turn off metal's use of bold fonts */
@@ -80,22 +80,27 @@ public class KeyEventDemo  extends JFrame
     }
 
 
-    /** Handle the key typed event from the text field. */
+    /**
+     * Handle the key typed event from the text field.
+     */
     public void keyTyped(KeyEvent e) {
-        displayInfo(e, "KEY TYPED: ");
+        displayInfo(e);
     }
 
-    /** Handle the key pressed event from the text field. */
+    @Override
     public void keyPressed(KeyEvent e) {
-        displayInfo(e, "KEY PRESSED: ");
+
     }
 
-    /** Handle the key released event from the text field. */
+    @Override
     public void keyReleased(KeyEvent e) {
-        displayInfo(e, "KEY RELEASED: ");
+
     }
 
-    /** Handle the button click. */
+
+    /**
+     * Handle the button click.
+     */
     public void actionPerformed(ActionEvent e) {
         //Clear the text components.
         displayArea.setText("");
@@ -112,58 +117,59 @@ public class KeyEventDemo  extends JFrame
      * but if you put them in a String, the characters
      * afterward won't show up in the text area.)
      */
-    private void displayInfo(KeyEvent e, String keyStatus){
+    private void displayInfo(KeyEvent e) {
 
         //You should only rely on the key char if the event
         //is a key typed event.
         int id = e.getID();
+        System.out.println(id + " id");
         String keyString;
         if (id == KeyEvent.KEY_TYPED) {
             char c = e.getKeyChar();
             keyString = "key character = '" + c + "'";
-        } else {
+
             int keyCode = e.getKeyCode();
-            keyString = "key code = " + keyCode
+            keyString += "\nkey code = " + keyCode
                     + " ("
                     + KeyEvent.getKeyText(keyCode)
                     + ")";
-        }
 
-        int modifiersEx = e.getModifiersEx();
-        String modString = "extended modifiers = " + modifiersEx;
-        String tmpString = KeyEvent.getModifiersExText(modifiersEx);
-        if (tmpString.length() > 0) {
-            modString += " (" + tmpString + ")";
-        } else {
-            modString += " (no extended modifiers)";
-        }
+            int modifiersEx = e.getModifiersEx();
+            String modString = "extended modifiers = " + modifiersEx;
+            String tmpString = KeyEvent.getModifiersExText(modifiersEx);
+            if (tmpString.length() > 0) {
+                modString += " (" + tmpString + ")";
+            } else {
+                modString += " (no extended modifiers)";
+            }
 
-        String actionString = "action key? ";
-        if (e.isActionKey()) {
-            actionString += "YES";
-        } else {
-            actionString += "NO";
-        }
+            String actionString = "action key? ";
+            if (e.isActionKey()) {
+                actionString += "YES";
+            } else {
+                actionString += "NO";
+            }
 
-        String locationString = "key location: ";
-        int location = e.getKeyLocation();
-        if (location == KeyEvent.KEY_LOCATION_STANDARD) {
-            locationString += "standard";
-        } else if (location == KeyEvent.KEY_LOCATION_LEFT) {
-            locationString += "left";
-        } else if (location == KeyEvent.KEY_LOCATION_RIGHT) {
-            locationString += "right";
-        } else if (location == KeyEvent.KEY_LOCATION_NUMPAD) {
-            locationString += "numpad";
-        } else { // (location == KeyEvent.KEY_LOCATION_UNKNOWN)
-            locationString += "unknown";
-        }
+            String locationString = "key location: ";
+            int location = e.getKeyLocation();
+            if (location == KeyEvent.KEY_LOCATION_STANDARD) {
+                locationString += "standard";
+            } else if (location == KeyEvent.KEY_LOCATION_LEFT) {
+                locationString += "left";
+            } else if (location == KeyEvent.KEY_LOCATION_RIGHT) {
+                locationString += "right";
+            } else if (location == KeyEvent.KEY_LOCATION_NUMPAD) {
+                locationString += "numpad";
+            } else { // (location == KeyEvent.KEY_LOCATION_UNKNOWN)
+                locationString += "unknown";
+            }
 
-        displayArea.append(keyStatus + newline
-                + "    " + keyString + newline
-                + "    " + modString + newline
-                + "    " + actionString + newline
-                + "    " + locationString + newline);
-        displayArea.setCaretPosition(displayArea.getDocument().getLength());
+            displayArea.append("KEY TYPED: " + newline
+                    + "    " + keyString + newline
+                    + "    " + modString + newline
+                    + "    " + actionString + newline
+                    + "    " + locationString + newline);
+            displayArea.setCaretPosition(displayArea.getDocument().getLength());
+        }
     }
 }
