@@ -25,7 +25,12 @@ public class Main {
         Game game = new Game(projectPath);
 
         game.onDataLoad();
-        game.onEnable();
+
+        if (true) {
+            game.onTest();
+        } else {
+            game.onEnable();
+        }
     }
 
 }

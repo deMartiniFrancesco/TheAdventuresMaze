@@ -5,8 +5,11 @@ import Grafica.MainFrame;
 import Control.Interfaces.Application;
 import Models.Chronometer;
 import Models.Grid;
-
+import Saving.SaveJson;
+import Saving.SaveObject;
+import Saving.TimeLevel;
 import javax.swing.*;
+import java.io.IOException;
 import java.util.Random;
 
 public class Game implements Application {
@@ -40,15 +43,14 @@ public class Game implements Application {
 
     @Override
     public void onDataLoad() {
+        istance = this;
+
+        actionListener = new GameActionListener();
 
     }
 
     @Override
     public void onEnable() {
-        istance = this;
-
-        actionListener = new GameActionListener();
-
         actionListener.performAction(States.MENU);
     }
 
@@ -75,7 +77,25 @@ public class Game implements Application {
     public void onDisable() {
 
 
-
         System.exit(0);
+    }
+
+    public void onTest() {
+            SaveJson saveJson = new SaveJson();
+
+        saveJson.saveOnFile(new SaveObject(
+                "Prova",
+                new TimeLevel[]{
+                        new TimeLevel(1, 5000),
+                        new TimeLevel(2, 8000)
+                }
+        ));
+
+        try {
+            System.out.println(saveJson.getObjectFromJsonFile(getResources() + "save.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
