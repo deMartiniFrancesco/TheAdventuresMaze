@@ -63,7 +63,7 @@ public class Cell {
 
     }
 
-    public Cell[] getTrueNeighbors(){
+    public Cell[] getTrueNeighbors() {
 
         Cell[] neighbors = new Cell[4];
 
@@ -83,7 +83,7 @@ public class Cell {
         return neighbors;
     }
 
-    public Cell getCasualNotNullNeighbor(Cell exlude){
+    public Cell getCasualNotNullNeighbor(Cell exlude) {
         ArrayList<Cell> neighbors = new ArrayList<>();
 
         if (top != null && top != exlude) {
@@ -127,14 +127,14 @@ public class Cell {
 
 
     public Cell getPrecedent() {
-        if (precedentStack.isEmpty()){
+        if (precedentStack.isEmpty()) {
             return null;
         }
         return precedentStack.pop();
     }
 
-    public Cell pickPrecedent(){
-        if (precedentStack.isEmpty()){
+    public Cell pickPrecedent() {
+        if (precedentStack.isEmpty()) {
             return null;
         }
         return precedentStack.peek();

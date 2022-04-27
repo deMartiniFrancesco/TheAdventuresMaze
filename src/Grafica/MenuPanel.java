@@ -1,17 +1,17 @@
 package Grafica;
 
-import Control.Interfaces.WindowPanel;
 import Action.ClickAction;
+import Control.Interfaces.WindowPanel;
 import Main.Game;
 import Main.States;
 import Models.Button;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class MenuPanel extends JPanel implements WindowPanel {
 
@@ -40,14 +40,14 @@ public class MenuPanel extends JPanel implements WindowPanel {
             Button settingsButton = new Button(
                     "Settings",
                     new ImageIcon(buttonIcon),
-                    new ClickAction(States.STARTING)
+                    new ClickAction(States.SETTINGS)
             );
             this.add(settingsButton);
 
             Button scoresButton = new Button(
                     "Scores",
                     new ImageIcon(buttonIcon),
-                    new ClickAction(States.STARTING)
+                    new ClickAction(States.SCORES)
             );
             this.add(scoresButton);
 

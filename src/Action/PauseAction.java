@@ -2,7 +2,7 @@ package Action;
 
 import Main.Game;
 
-public class PauseAction implements Runnable{
+public class PauseAction implements Runnable {
 
     private final Game game = Game.istance;
 

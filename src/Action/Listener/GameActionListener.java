@@ -34,7 +34,5 @@ public class GameActionListener {
             case NEXT_LEVEL -> nextLevelAction.run();
             case FINISH -> finishAction.run();
         }
-
-
     }
 }

@@ -25,28 +25,34 @@ public class MainFrame extends JFrame {
             }
         });
 
+        draw();
+
     }
+
     public void setCloseOperation(Runnable operation) {
         this.operation = operation;
     }
 
 
-    public void draw(){
+    public void draw() {
         EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                      UnsupportedLookAndFeelException ignored) {
             }
-            setCloseOperation(()-> game.actionListener.performAction(States.FINISH));
+            setCloseOperation(() -> game.actionListener.performAction(States.FINISH));
             setLayout(new BorderLayout());
-            add(game.mainPane);
             pack();
-            setLocationRelativeTo(null);
             setVisible(true);
         });
     }
 
 
-
+    public void addComponent(Component component) {
+        add(component);
+        setSize(component.getPreferredSize());
+        setLocationRelativeTo(null);
+        paint(getGraphics());
+    }
 }

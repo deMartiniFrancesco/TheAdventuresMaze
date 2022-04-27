@@ -2,8 +2,10 @@ package Main;
 
 public enum States {
 
-    MENU,
     STARTING,
+    SETTINGS,
+    SCORES,
+    MENU,
     PLAING,
     PAUSE,
     NEXT_LEVEL,

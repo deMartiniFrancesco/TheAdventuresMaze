@@ -1,13 +1,14 @@
 package Main;
 
 import Action.Listener.GameActionListener;
-import Grafica.MainFrame;
 import Control.Interfaces.Application;
+import Grafica.MainFrame;
 import Models.Chronometer;
 import Models.Grid;
 import Saving.SaveJson;
 import Saving.SaveObject;
 import Saving.TimeLevel;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.util.Random;
@@ -54,13 +55,14 @@ public class Game implements Application {
         actionListener.performAction(States.MENU);
     }
 
-
-    public void initFrame() {
+    public void clearFrame() {
         if (frame != null) {
-            frame.dispose();
+            frame.remove(mainPane);
+        } else {
+            frame = new MainFrame("TheAdventuresMaze");
         }
-        frame = new MainFrame("TheAdventuresMaze");
     }
+
 
     public void setPause() {
         isPause = !isPause;
@@ -75,13 +77,11 @@ public class Game implements Application {
 
     @Override
     public void onDisable() {
-
-
         System.exit(0);
     }
 
     public void onTest() {
-            SaveJson saveJson = new SaveJson();
+        SaveJson saveJson = new SaveJson();
 
         saveJson.saveOnFile(new SaveObject(
                 "Prova",

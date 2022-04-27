@@ -3,16 +3,16 @@ package Action;
 import Grafica.MenuPanel;
 import Main.Game;
 
-public class MenuAction implements Runnable{
+public class MenuAction implements Runnable {
 
     private final Game game = Game.istance;
 
 
     @Override
     public void run() {
-        game.initFrame();
+        game.clearFrame();
         game.mainPane = new MenuPanel();
-        game.frame.draw();
+        game.frame.addComponent(game.mainPane);
     }
 
 }

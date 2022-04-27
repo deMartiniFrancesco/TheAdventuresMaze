@@ -6,12 +6,11 @@ import Control.Interfaces.WindowPanel;
 import Main.Game;
 import Main.States;
 import Models.Cell;
-import Models.PlayerKeyAction;
 import Models.Grid;
+import Models.PlayerKeyAction;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class GridPane extends JPanel implements WindowPanel {

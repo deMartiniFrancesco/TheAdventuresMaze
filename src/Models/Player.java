@@ -1,7 +1,7 @@
 package Models;
 
-import Grafica.GridPane;
 import Control.Interfaces.MovableEntity;
+import Grafica.GridPane;
 import Main.Game;
 import Main.States;
 

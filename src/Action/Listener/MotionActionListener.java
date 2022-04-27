@@ -27,14 +27,13 @@ public class MotionActionListener extends AbstractAction implements ActionListen
             return;
         }
 
-        if (game.isPause){
+        if (game.isPause) {
             return;
         }
         if (playerKeyAction.equals(PlayerKeyAction.RESET)) {
             game.actionListener.performAction(States.STARTING);
 
-        }
-        else {
+        } else {
             target.move(playerKeyAction);
         }
     }
