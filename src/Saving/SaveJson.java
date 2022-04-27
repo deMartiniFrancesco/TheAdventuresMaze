@@ -2,12 +2,14 @@ package Saving;
 
 import Main.Game;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
 
 public class SaveJson {
 
@@ -18,22 +20,31 @@ public class SaveJson {
         gson = new Gson();
     }
 
-    public Object getObjectFromJsonFile(String jsonData) throws IOException {
-//        JsonObject object = (JsonObject) JsonParser.parseString(jsonData);
-//        return object;
-        return gson.fromJson(Files.newBufferedReader(Paths.get(jsonData)), Object.class);
+
+    public <T> List<T> getList(FileReader reader, Class<T> clazz) {
+        Type typeOfT = TypeToken.getParameterized(List.class, clazz).getType();
+        return gson.fromJson(reader, typeOfT);
     }
 
-
-    public void saveOnFile(SaveObject saveObject) {
-
-        try (Writer writer = new FileWriter(game.getResources() + "save.json")) {
-            gson.toJson(saveObject , writer);
+    public List<SaveObject> getSavedObjectList() throws IOException {
+        try (FileReader reader = new FileReader(game.getResources() + "save.json")){
+            return getList(reader, SaveObject.class);
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        System.out.println();
+        return Collections.emptyList();
+    }
+
+
+    public void saveOnFile(SaveObject[] saveObjects) {
+
+        try (FileWriter writer = new FileWriter(game.getResources() + "save.json")) {
+            gson.toJson(saveObjects , writer);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

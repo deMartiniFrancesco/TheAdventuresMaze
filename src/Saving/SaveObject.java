@@ -1,4 +1,6 @@
 package Saving;
 
-public record SaveObject(String name, TimeLevel[] recordTimeLevels) {
+import java.util.List;
+
+public record SaveObject(String name, List<TimeLevel> timeLevels) {
 }

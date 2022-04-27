@@ -1,13 +1,28 @@
-{
-  "name": "Prova",
-  "recordTimeLevels": [
-    {
-      "levelNumber": 1,
-      "time": 5000
-    },
-    {
-      "levelNumber": 2,
-      "time": 8000
-    }
-  ]
-}
+[
+  {
+    "name": "Prova2",
+    "timeLevels": [
+      {
+        "levelNumber": 1,
+        "time": 5000
+      },
+      {
+        "levelNumber": 2,
+        "time": 8000
+      }
+    ]
+  },
+  {
+    "name": "Prova",
+    "timeLevels": [
+      {
+        "levelNumber": 1,
+        "time": 5000
+      },
+      {
+        "levelNumber": 2,
+        "time": 8000
+      }
+    ]
+  }
+]

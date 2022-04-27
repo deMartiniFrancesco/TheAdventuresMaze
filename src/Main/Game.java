@@ -11,6 +11,7 @@ import Saving.TimeLevel;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 public class Game implements Application {
@@ -83,16 +84,25 @@ public class Game implements Application {
     public void onTest() {
         SaveJson saveJson = new SaveJson();
 
-        saveJson.saveOnFile(new SaveObject(
-                "Prova",
-                new TimeLevel[]{
-                        new TimeLevel(1, 5000),
-                        new TimeLevel(2, 8000)
-                }
-        ));
+        saveJson.saveOnFile(new SaveObject[]{
+                new SaveObject(
+                        "Prova2",
+                        List.of(
+                                new TimeLevel(1, 5000),
+                                new TimeLevel(2, 8000)
+                        )
+                ),
+                new SaveObject(
+                        "Prova",
+                        List.of(
+                                new TimeLevel(1, 5000),
+                                new TimeLevel(2, 8000)
+                        )
+                )
+        });
 
         try {
-            System.out.println(saveJson.getObjectFromJsonFile(getResources() + "save.json"));
+            System.out.println(saveJson.getSavedObjectList());
         } catch (IOException e) {
             e.printStackTrace();
         }
