@@ -58,20 +58,11 @@ public class Game implements Application {
 
     public void clearFrame() {
         if (frame != null) {
-            frame.remove(mainPane);
+            JPanel contentPane = (JPanel) frame.getContentPane();
+
+            contentPane.removeAll();
         } else {
             frame = new MainFrame("TheAdventuresMaze");
-        }
-    }
-
-
-    public void setPause() {
-        isPause = !isPause;
-
-        if (isPause) {
-            actionListener.performAction(States.PAUSE);
-        } else {
-            actionListener.performAction(States.PLAING);
         }
     }
 

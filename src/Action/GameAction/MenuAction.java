@@ -1,4 +1,4 @@
-package Action.Game;
+package Action.GameAction;
 
 import Grafica.MenuPanel;
 import Main.Game;

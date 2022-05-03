@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 public class Button extends JButton implements ActionListener {
     Runnable action;
 
-    public Button(String title, ImageIcon image, Runnable action) {
+    public Button(String title, ImageIcon image, Runnable action, int fontSize) {
 
         super(title, image);
         this.action = action;
 
-        setFont(new Font("Impact", Font.BOLD, 40));
+        setFont(new Font("Impact", Font.BOLD, fontSize));
 
         setHorizontalTextPosition(JButton.CENTER);
         setVerticalTextPosition(JButton.CENTER);

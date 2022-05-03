@@ -1,6 +1,6 @@
 package Action.Listener;
 
-import Action.*;
+import Action.GameAction.*;
 import Main.Game;
 import Main.States;
 

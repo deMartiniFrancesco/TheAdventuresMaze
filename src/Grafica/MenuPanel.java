@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
     private Image image;
     private final int panelWidth = 400;
-    private final int panelHeight = 500;
+    private final int panelHeight = 200;
 
     public MenuPanel() {
         try {
@@ -27,32 +27,41 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
             Image buttonIcon = ImageIO
                     .read(new File(Game.istance.getResources() + "button.png"))
-                    .getScaledInstance(panelWidth - 50, panelHeight / 6, Image.SCALE_DEFAULT);
+                    .getScaledInstance(panelWidth - 50, panelHeight / 2, Image.SCALE_DEFAULT);
 
+
+            JLabel title = new JLabel("TheAdventureMaze");
+            title.setForeground(Color.GRAY);
+            title.setFont(new Font("Impact", Font.BOLD, 50));
+
+            add(title);
 
             Button startButton = new Button(
                     "Start",
                     new ImageIcon(buttonIcon),
-                    new ClickAction(States.STARTING)
+                    new ClickAction(States.STARTING),
+                    40
             );
             this.add(startButton);
 
-            Button settingsButton = new Button(
-                    "Settings",
-                    new ImageIcon(buttonIcon),
-                    new ClickAction(States.SETTINGS)
-            );
-            this.add(settingsButton);
+//            Button settingsButton = new Button(
+//                    "Settings",
+//                    new ImageIcon(buttonIcon),
+//                    new ClickAction(States.SETTINGS),
+//                    40
+//            );
+//            this.add(settingsButton);
 
-            Button scoresButton = new Button(
-                    "Scores",
-                    new ImageIcon(buttonIcon),
-                    new ClickAction(States.SCORES)
-            );
-            this.add(scoresButton);
+//            Button scoresButton = new Button(
+//                    "Scores",
+//                    new ImageIcon(buttonIcon),
+//                    new ClickAction(States.SCORES),
+//                    40
+//            );
+//            this.add(scoresButton);
 
         } catch (IOException ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -69,7 +78,5 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
     @Override
     public void addAction(List<?> args) {
-        JButton target;
-        States state;
     }
 }

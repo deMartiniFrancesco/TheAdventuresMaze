@@ -43,16 +43,19 @@ public class MainFrame extends JFrame {
             }
             setCloseOperation(() -> game.actionListener.performAction(States.FINISH));
             setLayout(new BorderLayout());
+            setResizable(false);
             pack();
             setVisible(true);
         });
     }
 
 
-    public void addComponent(Component component) {
-        add(component);
-        setSize(component.getPreferredSize());
+    public void addComponent(JPanel panel) {
+        JPanel contentPane = (JPanel) getContentPane();
+        contentPane.add(panel);
+        pack();
         setLocationRelativeTo(null);
-        paint(getGraphics());
+        contentPane.repaint();
+        contentPane.revalidate();
     }
 }

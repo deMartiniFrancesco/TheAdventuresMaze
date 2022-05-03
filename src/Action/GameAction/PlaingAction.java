@@ -1,4 +1,4 @@
-package Action.Game;
+package Action.GameAction;
 
 import Control.Timer;
 import Main.Game;
@@ -16,15 +16,9 @@ public class PlaingAction implements Runnable {
                     unblind maze
                  */
 
-
-        if (game.grid.getPlayer() == null) {
-            game.grid.addPlayer();
-            game.chronometer = new Chronometer(10, Timer.DURATION_INFINITY);
-            game.chronometer.start();
-        } else {
-            System.out.println("Resume");
-            game.chronometer.resume();
-        }
+        game.grid.addPlayer();
+        game.chronometer = new Chronometer(10, Timer.DURATION_INFINITY);
+        game.chronometer.start();
 
         game.mainPane.repaint();
     }

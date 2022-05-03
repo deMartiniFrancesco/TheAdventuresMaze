@@ -1,2 +1,8 @@
-package Models;public enum MenuEnum {
+package Models;
+
+public enum MenuEnum {
+
+
+
+
 }
