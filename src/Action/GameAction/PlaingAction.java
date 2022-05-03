@@ -1,4 +1,4 @@
-package Action;
+package Action.Game;
 
 import Control.Timer;
 import Main.Game;

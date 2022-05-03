@@ -1,4 +1,4 @@
-package Action;
+package Action.Game;
 
 import Grafica.GridPane;
 import Main.Game;

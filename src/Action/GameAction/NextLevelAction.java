@@ -1,4 +1,4 @@
-package Action;
+package Action.Game;
 
 import Main.Game;
 import Main.States;
