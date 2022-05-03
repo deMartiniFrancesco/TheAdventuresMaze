@@ -36,9 +36,9 @@ public final class SaveObject {
 
     @Override
     public String toString() {
-        return "SaveObject[" +
-                "name=" + name + ", " +
-                "timeLevels=" + timeLevels + ']';
+        return "\nSaveObject{" +
+                "\n\t\tname = '" + name + '\'' +
+                "\n\t\ttimeLevels = " + timeLevels +
+                "}\n";
     }
-
 }

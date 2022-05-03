@@ -2,6 +2,7 @@ package Action.GameAction;
 
 import Grafica.PausePane;
 import Main.Game;
+import Main.States;
 import Models.PlayerKeyAction;
 
 import javax.swing.*;
@@ -36,8 +37,9 @@ public class PauseAction implements Runnable {
 
         } else {
             game.chronometer.resume();
+            game.state = States.PLAING;
             Window win = SwingUtilities.getWindowAncestor(pausePane);
-            win.dispose();  // here -- dispose of the JDialog
+            win.dispose();
 
         }
     }

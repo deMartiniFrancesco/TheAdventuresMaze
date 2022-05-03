@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class GridPane extends JPanel implements WindowPanel {
+public class GridPane extends JPanel {
 
     private final Game game = Game.istance;
 
@@ -21,28 +21,6 @@ public class GridPane extends JPanel implements WindowPanel {
 
     private final int dimension = Cell.DIMENTION;
 
-    @Override
-    public void addAction(List<?> args) {
-        KeyStroke pressedKeyStroke;
-        PlayerKeyAction direction;
-        MovableEntity target;
-        try {
-            pressedKeyStroke = (KeyStroke) args.get(0);
-            direction = (PlayerKeyAction) args.get(1);
-            target = (MovableEntity) args.get(2);
-        } catch (Exception ignored) {
-            return;
-        }
-
-        String name = pressedKeyStroke.toString();
-
-        MotionActionListener action = new MotionActionListener(name, direction, target);
-
-        InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(pressedKeyStroke, name);
-        getActionMap().put(name, action);
-
-    }
 
     @Override
     public Dimension getPreferredSize() {

@@ -1,23 +1,23 @@
 [
   {
-    "name": "Prova2",
+    "name": "Player 1",
     "timeLevels": [
       {
         "levelNumber": 1,
-        "time": 5000
+        "time": 3000
       },
       {
         "levelNumber": 2,
-        "time": 8000
+        "time": 5000
       }
     ]
   },
   {
-    "name": "Prova",
+    "name": "Player 2",
     "timeLevels": [
       {
         "levelNumber": 1,
-        "time": 5000
+        "time": 6000
       },
       {
         "levelNumber": 2,

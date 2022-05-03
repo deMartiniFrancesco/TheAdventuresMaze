@@ -1,5 +1,6 @@
 package Action.GameAction;
 
+import Grafica.GamePanel;
 import Grafica.GridPane;
 import Main.Game;
 import Models.Grid;
@@ -12,7 +13,7 @@ public class StartingAction implements Runnable {
     public void run() {
         game.clearFrame();
         game.grid = new Grid();
-        game.mainPane = new GridPane();
+        game.mainPane = new GamePanel();
         game.grid.generateMaze();
         game.frame.addComponent(game.mainPane);
 

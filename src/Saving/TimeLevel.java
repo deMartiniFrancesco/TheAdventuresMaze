@@ -35,9 +35,9 @@ public final class TimeLevel {
 
     @Override
     public String toString() {
-        return "TimeLevel[" +
-                "levelNumber=" + levelNumber + ", " +
-                "time=" + time + ']';
+        return "\nTimeLevel{" +
+                "\n\t\tlevelNumber = " + levelNumber +
+                "\n\t\ttime = " + time +
+                "}\n";
     }
-
 }

@@ -39,7 +39,8 @@ public class MainFrame extends JFrame {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                     UnsupportedLookAndFeelException ignored) {
+                     UnsupportedLookAndFeelException exception) {
+                exception.printStackTrace();
             }
             setCloseOperation(() -> game.actionListener.performAction(States.FINISH));
             setLayout(new BorderLayout());

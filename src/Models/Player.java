@@ -1,6 +1,7 @@
 package Models;
 
 import Control.Interfaces.MovableEntity;
+import Control.Interfaces.WindowPanel;
 import Grafica.GridPane;
 import Main.Game;
 import Main.States;
@@ -27,7 +28,7 @@ public class Player implements MovableEntity {
 
 
     private void addMotionSupport() {
-        GridPane mainPane = (GridPane) Game.istance.mainPane;
+        WindowPanel mainPane = (WindowPanel) Game.istance.mainPane;
 
         for (PlayerKeyAction action : PlayerKeyAction.values()) {
             mainPane.addAction(List.of(action.getKey(), action, this));

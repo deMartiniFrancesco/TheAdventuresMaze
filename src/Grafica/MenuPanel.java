@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
     private Image image;
     private final int panelWidth = 400;
-    private final int panelHeight = 200;
+    private final int panelHeight = 450;
 
     public MenuPanel() {
         try {
@@ -27,14 +27,16 @@ public class MenuPanel extends JPanel implements WindowPanel {
 
             Image buttonIcon = ImageIO
                     .read(new File(Game.istance.getResources() + "button.png"))
-                    .getScaledInstance(panelWidth - 50, panelHeight / 2, Image.SCALE_DEFAULT);
+                    .getScaledInstance(panelWidth - 50, panelHeight / 5, Image.SCALE_DEFAULT);
 
+            setLayout(new GridLayout(4, 0, 10, 0));
 
             JLabel title = new JLabel("TheAdventureMaze");
-            title.setForeground(Color.GRAY);
-            title.setFont(new Font("Impact", Font.BOLD, 50));
+            title.setHorizontalAlignment( SwingConstants.CENTER );
+            title.setForeground(Color.WHITE);
+            title.setFont(new Font("Impact", Font.PLAIN, 30));
 
-            add(title);
+            add(title, 0, 0);
 
             Button startButton = new Button(
                     "Start",
@@ -44,21 +46,21 @@ public class MenuPanel extends JPanel implements WindowPanel {
             );
             this.add(startButton);
 
-//            Button settingsButton = new Button(
-//                    "Settings",
-//                    new ImageIcon(buttonIcon),
-//                    new ClickAction(States.SETTINGS),
-//                    40
-//            );
-//            this.add(settingsButton);
+            Button settingsButton = new Button(
+                    "Settings",
+                    new ImageIcon(buttonIcon),
+                    new ClickAction(States.SETTINGS),
+                    40
+            );
+            this.add(settingsButton);
 
-//            Button scoresButton = new Button(
-//                    "Scores",
-//                    new ImageIcon(buttonIcon),
-//                    new ClickAction(States.SCORES),
-//                    40
-//            );
-//            this.add(scoresButton);
+            Button scoresButton = new Button(
+                    "Scores",
+                    new ImageIcon(buttonIcon),
+                    new ClickAction(States.SCORES),
+                    40
+            );
+            this.add(scoresButton);
 
         } catch (IOException ex) {
             ex.printStackTrace();

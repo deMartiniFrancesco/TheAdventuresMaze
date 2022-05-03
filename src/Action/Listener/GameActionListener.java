@@ -7,6 +7,7 @@ import Main.States;
 public class GameActionListener {
     private final Game game = Game.istance;
     private final Runnable menuAction;
+    private final Runnable settingsAction;
     private final Runnable startingAction;
     private final Runnable plaingAction;
     private final Runnable pauseAction;
@@ -16,6 +17,7 @@ public class GameActionListener {
 
     public GameActionListener() {
         menuAction = new MenuAction();
+        settingsAction = new SettingsAction();
         startingAction = new StartingAction();
         plaingAction = new PlaingAction();
         pauseAction = new PauseAction();
@@ -28,6 +30,7 @@ public class GameActionListener {
 
         switch (state) {
             case MENU -> menuAction.run();
+            case SETTINGS -> settingsAction.run();
             case STARTING -> startingAction.run();
             case PLAING -> plaingAction.run();
             case PAUSE -> pauseAction.run();

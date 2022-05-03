@@ -59,7 +59,6 @@ public class Game implements Application {
     public void clearFrame() {
         if (frame != null) {
             JPanel contentPane = (JPanel) frame.getContentPane();
-
             contentPane.removeAll();
         } else {
             frame = new MainFrame("TheAdventuresMaze");
@@ -77,16 +76,16 @@ public class Game implements Application {
 
         saveJson.saveOnFile(new SaveObject[]{
                 new SaveObject(
-                        "Prova2",
+                        "Player 1",
                         List.of(
-                                new TimeLevel(1, 5000),
-                                new TimeLevel(2, 8000)
+                                new TimeLevel(1, 3000),
+                                new TimeLevel(2, 5000)
                         )
                 ),
                 new SaveObject(
-                        "Prova",
+                        "Player 2",
                         List.of(
-                                new TimeLevel(1, 5000),
+                                new TimeLevel(1, 6000),
                                 new TimeLevel(2, 8000)
                         )
                 )

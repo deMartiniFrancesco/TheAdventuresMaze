@@ -21,8 +21,7 @@ public class PausePane extends JPanel implements WindowPanel {
     private final int panelWidth = 250;
     private final int panelHeight = 250;
 
-
-    private static final Color BG = new Color(123, 63, 0);
+    private static final Color BG = new Color(0, 74, 123, 89);
 
     public PausePane() {
         try {
@@ -74,11 +73,11 @@ public class PausePane extends JPanel implements WindowPanel {
     @Override
     public void addAction(List<?> args) {
         KeyStroke pressedKeyStroke;
-        PlayerKeyAction direction;
+        PlayerKeyAction keyAction;
         Object target;
         try {
             pressedKeyStroke = (KeyStroke) args.get(0);
-            direction = (PlayerKeyAction) args.get(1);
+            keyAction = (PlayerKeyAction) args.get(1);
             target = args.get(2);
         } catch (Exception ignored) {
             return;
@@ -86,7 +85,7 @@ public class PausePane extends JPanel implements WindowPanel {
 
         String name = pressedKeyStroke.toString();
 
-        MotionActionListener action = new MotionActionListener(name, direction, target);
+        MotionActionListener action = new MotionActionListener(name, keyAction, target);
 
         InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(pressedKeyStroke, name);
