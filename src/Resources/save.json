@@ -4,11 +4,11 @@
     "timeLevels": [
       {
         "levelNumber": 1,
-        "time": 3000
+        "time": 5000
       },
       {
         "levelNumber": 2,
-        "time": 5000
+        "time": 8000
       }
     ]
   },
