@@ -30,7 +30,6 @@ public class Game implements Application {
     public Grid grid;
     public JPanel mainPane;
     public MainFrame frame;
-
     public Chronometer chronometer;
 
 

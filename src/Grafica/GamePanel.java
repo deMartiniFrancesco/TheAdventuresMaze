@@ -4,9 +4,12 @@ import Action.ClickAction;
 import Action.Listener.MotionActionListener;
 import Control.Interfaces.MovableEntity;
 import Control.Interfaces.WindowPanel;
+import Control.Timer;
 import Main.Game;
 import Main.States;
 import Models.Button;
+import Models.Chronometer;
+import Models.ChronometerLabel;
 import Models.PlayerKeyAction;
 
 import javax.imageio.ImageIO;
@@ -17,36 +20,50 @@ import java.io.IOException;
 import java.util.List;
 
 public class GamePanel extends JPanel implements WindowPanel {
-
     private final Game game = Game.istance;
-    private final GridPane gridPane;
+
+    private Image pauseIcon;
 
     public GamePanel() {
 
-
-        gridPane = new GridPane();
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
 
         try {
-            Image pauseIcon = ImageIO
+            pauseIcon = ImageIO
                     .read(new File(Game.istance.getResources() + "pause_icon.png"))
                     .getScaledInstance(30, 30, Image.SCALE_DEFAULT);
 
-            add(new Button(
-                    "",
-                    new ImageIcon(pauseIcon),
-                    new ClickAction(States.PAUSE),
-                    0
-            ));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-        JLabel time = new JLabel("...");
-        add(time);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 0.3;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        add(new Button("", new ImageIcon(pauseIcon), new ClickAction(States.PAUSE), 0), constraints);
+
+        ChronometerLabel time = new ChronometerLabel();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 0.7;
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        add(time, constraints);
+
+        game.chronometer = new Chronometer(10, Timer.DURATION_INFINITY, time);
+        game.chronometer.start();
 
 
-        add(gridPane);
+        GridPane gridPane = new GridPane();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 0.0;
+        constraints.gridwidth = 3;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        add(gridPane, constraints);
+
     }
 
 
@@ -77,7 +94,5 @@ public class GamePanel extends JPanel implements WindowPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
     }
 }

@@ -17,9 +17,6 @@ public class PlaingAction implements Runnable {
                  */
 
         game.grid.addPlayer();
-        game.chronometer = new Chronometer(10, Timer.DURATION_INFINITY);
-        game.chronometer.start();
-
         game.mainPane.repaint();
     }
 }
