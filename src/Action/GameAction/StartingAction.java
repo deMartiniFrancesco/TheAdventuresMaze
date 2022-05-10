@@ -16,6 +16,5 @@ public class StartingAction implements Runnable {
         game.mainPane = new GamePanel();
         game.grid.generateMaze();
         game.frame.addComponent(game.mainPane);
-
     }
 }
