@@ -24,13 +24,12 @@ public final class TimeLevel {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (TimeLevel) obj;
-        return this.levelNumber == that.levelNumber &&
-                this.time == that.time;
+        return this.levelNumber == that.levelNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(levelNumber, time);
+        return Objects.hash(levelNumber);
     }
 
     @Override

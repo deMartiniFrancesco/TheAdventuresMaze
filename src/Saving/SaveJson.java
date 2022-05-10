@@ -9,9 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class SaveJson {
@@ -24,43 +22,48 @@ public class SaveJson {
     }
 
 
-    public <T> List<T> getList(FileReader reader, Class<T> clazz) {
-        Type typeOfT = TypeToken.getParameterized(List.class, clazz).getType();
+    public <T> Set<T> getList(FileReader reader, Class<T> clazz) {
+        Type typeOfT = TypeToken.getParameterized(Set.class, clazz).getType();
         return gson.fromJson(reader, typeOfT);
     }
 
-    public List<SaveObject> getSavedObjectList() {
+    public Set<SaveObject> getSavedObjectList() {
         try (FileReader reader = new FileReader(game.getResources() + "save.json")) {
             return getList(reader, SaveObject.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 
 
     public void saveObject(SaveObject saveObject) {
-        List<SaveObject> saveObjectList = getSavedObjectList();
-        if (saveObjectList
-                .stream()
-                .map(SaveObject::name)
-                .anyMatch(s -> s.equalsIgnoreCase(saveObject.name()))
-        ) {
+        Set<SaveObject> saveObjectList = getSavedObjectList();
+        SaveObject finalSaveObject = saveObject;
+        Optional<SaveObject> objectSaved = saveObjectList.stream()
+                .filter(save -> save.equals(finalSaveObject))
+                .findFirst();
+        if (objectSaved.isPresent()) {
             //sovrascrittura se record
-            Optional<SaveObject> objectSaved = saveObjectList.stream()
-                    .filter(save -> save.name().equalsIgnoreCase(saveObject.name()))
-                    .findFirst();
-            if (objectSaved.isEmpty()) {
-                return;
-            }
+
             SaveObject savedObject = objectSaved.get();
             //controllo per ogni livello in player se é record
-            
+            boolean edit = false;
+            for (TimeLevel record : saveObject.timeLevels()) {
+                if (savedObject.timeLevels().removeIf(timeLevel -> timeLevel.levelNumber() == record.levelNumber() && timeLevel.time() > record.time())) {
+                    edit = true;
+                }
+                savedObject.timeLevels().add(record);
+            }
+            boolean finalEdit = edit;
+            saveObjectList.removeIf(savedObject1 -> finalEdit && savedObject1.equals(savedObject));
+            saveObject = savedObject;
 
-
-        } else {
-            //salvataggio nuovo giocatore
         }
+
+        saveObjectList.add(saveObject);
+
+        saveOnFile(saveObjectList.toArray(SaveObject[]::new));
 
     }
 

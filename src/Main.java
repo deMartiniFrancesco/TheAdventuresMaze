@@ -26,7 +26,7 @@ public class Main {
 
         game.onDataLoad();
 
-        if (true) {
+        if (false) {
             game.onTest();
         } else {
             game.onEnable();

@@ -10,8 +10,10 @@ import Saving.SaveObject;
 import Saving.TimeLevel;
 
 import javax.swing.*;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Game implements Application {
 
@@ -72,15 +74,13 @@ public class Game implements Application {
     public void onTest() {
         SaveJson saveJson = new SaveJson();
 
-        SaveObject playerSaveObject = new SaveObject("Player 3",
-                List.of(
-                        new TimeLevel(1, 50000)
-                )
-        );
         SaveObject playerSaveObject2 = new SaveObject("Player 1",
-                List.of(
-                        new TimeLevel(1, 3000),
-                        new TimeLevel(2, 5000)
+                new LinkedHashSet<>(
+                        Set.of(
+                                new TimeLevel(1, 2000),
+                                new TimeLevel(2, 8000),
+                                new TimeLevel(3, 5000)
+                        )
                 )
         );
 

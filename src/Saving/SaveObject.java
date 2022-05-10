@@ -2,12 +2,13 @@ package Saving;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public final class SaveObject {
     private final String name;
-    private final List<TimeLevel> timeLevels;
+    private final Set<TimeLevel> timeLevels;
 
-    public SaveObject(String name, List<TimeLevel> timeLevels) {
+    public SaveObject(String name, Set<TimeLevel> timeLevels) {
         this.name = name;
         this.timeLevels = timeLevels;
     }
@@ -16,7 +17,7 @@ public final class SaveObject {
         return name;
     }
 
-    public List<TimeLevel> timeLevels() {
+    public Set<TimeLevel> timeLevels() {
         return timeLevels;
     }
 
@@ -25,13 +26,12 @@ public final class SaveObject {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (SaveObject) obj;
-        return Objects.equals(this.name, that.name) &&
-                Objects.equals(this.timeLevels, that.timeLevels);
+        return this.name.equalsIgnoreCase(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, timeLevels);
+        return Objects.hash(name);
     }
 
     @Override
