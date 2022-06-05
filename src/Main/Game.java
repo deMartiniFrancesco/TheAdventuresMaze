@@ -77,9 +77,7 @@ public class Game implements Application {
         SaveObject playerSaveObject2 = new SaveObject("Player 1",
                 new LinkedHashSet<>(
                         Set.of(
-                                new TimeLevel(1, 2000),
-                                new TimeLevel(2, 8000),
-                                new TimeLevel(3, 5000)
+                                new TimeLevel(3, 2000)
                         )
                 )
         );
