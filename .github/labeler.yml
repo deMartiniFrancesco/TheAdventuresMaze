@@ -1,0 +1,33 @@
+documentation:
+  - README.md
+  
+library:
+  - lib/*
+
+workflows:
+  - .github/workflows/*
+
+resources:
+  - src/Resources/*
+
+Action:
+  - src/Action/*
+
+Control:
+  - src/Control/*
+
+Grafica:
+  - src/Grafica/*
+
+Main:
+  - src/Main/*
+
+Models:
+  - src/Models/*
+
+Resources:
+  - src/Resources/*
+
+Saving:
+  - src/Saving/*
+
