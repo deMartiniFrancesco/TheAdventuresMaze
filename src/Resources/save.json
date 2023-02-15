@@ -20,11 +20,11 @@
         "time": 5000
       },
       {
-        "levelNumber": 3,
-        "time": 5000
+        "levelNumber": 1,
+        "time": 2000
       },
       {
-        "levelNumber": 1,
+        "levelNumber": 3,
         "time": 2000
       }
     ]
